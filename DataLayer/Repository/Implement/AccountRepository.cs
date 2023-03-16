@@ -9,8 +9,16 @@ using System.Threading.Tasks;
 
 namespace DataLayer.Repository.Implement
 {
-    public class AccountRepository : RepositoryBase<Account>,IAccountRepository<Account>
+	public class AccountRepository : RepositoryBase<Account>, IAccountRepository
 	{
-	
+		public AccountRepository(StoreDBContext context) : base(context)
+		{
+
+		}
+
+		public Account Login(string username, string password)
+		{
+			return _dbSet.FirstOrDefault(user => user.Username.Equals(username) && user.Password.Equals(password));
+		}
 	}
 }

@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataLayer.Repository.Interface
+namespace ServiceLayer.Interface
 {
-	public interface IStoreRepository : IRepositoryBase<Store>
+	public interface IAccountService
 	{
-
+		Account Login(string username, string password);
 	}
 }

@@ -8,8 +8,10 @@ using System.Threading.Tasks;
 
 namespace DataLayer.Repository.Implement
 {
-    public class ProductRepository : RepositoryBase<Product>
+	public class ProductRepository : RepositoryBase<Product>
 	{
-
+		public ProductRepository(StoreDBContext context) : base(context)
+		{
+		}
 	}
 }

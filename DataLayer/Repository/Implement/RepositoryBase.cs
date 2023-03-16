@@ -12,15 +12,17 @@ namespace DataLayer.Repository.Implement
     public class RepositoryBase<T> : IRepositoryBase<T> where T:class 
     {
         private StoreDBContext _storeDBContext;
-        public DbSet<T> Set { get; set; }
-        public RepositoryBase()
+        protected DbSet<T> _dbSet { get; set; }
+        
+        public RepositoryBase(StoreDBContext context)
         {
-            _storeDBContext = new();
-            Set = _storeDBContext.Set<T>();
+            _storeDBContext = context;
+			_dbSet = _storeDBContext.Set<T>();
         }
+
         public T Get(Expression<Func<T, bool>> predicate)
         {
-            return Set.Where(predicate).FirstOrDefault();
+            return _dbSet.Where(predicate).FirstOrDefault();
         }
         public void Delete(Expression<Func<T, bool>> predicate)
         {
@@ -28,17 +30,17 @@ namespace DataLayer.Repository.Implement
         }
         public bool Update(T entity)
         {
-            Set.Attach(entity);
+			_dbSet.Attach(entity);
             _storeDBContext.Entry(entity).State = EntityState.Modified;
             return _storeDBContext.SaveChanges()>0;
         }
         public List<T> GetAll()
         {
-            return Set.ToList();
+            return _dbSet.ToList();
         }
         public bool Create(T entity)
         {
-            Set.Add(entity);
+			_dbSet.Add(entity);
             return _storeDBContext.SaveChanges() > 0;
         }
 
