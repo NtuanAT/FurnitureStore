@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataLayer.Repository.Implement
 {
-	public class InStoreProductRepository:RepositoryBase<InStoreProduct>
+    public class InStoreProductRepository:RepositoryBase<InStoreProduct>,IInStoreProductRepository<InStoreProduct>
 	{
 	}
 }

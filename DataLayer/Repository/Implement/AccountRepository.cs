@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DataLayer.Repository.Implement
 {
-	public class AccountRepository : RepositoryBase<Account>
+    public class AccountRepository : RepositoryBase<Account>,IAccountRepository<Account>
 	{
 	
 	}
