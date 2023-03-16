@@ -1,3 +1,5 @@
+using DataLayer;
+
 namespace FurnitureStoreWeb
 {
 	public class Program
@@ -8,6 +10,8 @@ namespace FurnitureStoreWeb
 
 			// Add services to the container.
 			builder.Services.AddRazorPages();
+			builder.Services.AddSession();
+			builder.Services.AddDbContext<StoreDBContext>();
 
 			var app = builder.Build();
 
@@ -21,6 +25,7 @@ namespace FurnitureStoreWeb
 
 			app.UseHttpsRedirection();
 			app.UseStaticFiles();
+			app.UseSession();
 
 			app.UseRouting();
 
