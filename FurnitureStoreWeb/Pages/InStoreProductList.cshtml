@@ -1,0 +1,50 @@
+﻿@page
+@model FurnitureStoreWeb.Pages.InStoreProductListModel
+@{
+}
+
+<h2>In Store Product List</h2>
+
+<div>
+	<table>
+		<thead>
+			<tr>
+				<th>@Html.DisplayNameFor(model => model.products[0].Product.ProductName)</th>
+				<th>@Html.DisplayNameFor(model => model.products[0].Product.Category)</th>
+				<th>@Html.DisplayNameFor(model => model.products[0].Product.Price)</th>
+				<th>@Html.DisplayNameFor(model => model.products[0].Quantity)</th>
+				<th>@Html.DisplayNameFor(model => model.products[0].Status)</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			@foreach (var item in Model.products)
+			{
+				<tr>
+					<td>@Html.DisplayFor(modelItem => item.Product.ProductName)</td>
+					<td>@Html.DisplayFor(modelItem => item.Product.Category)</td>
+					<td>@Html.DisplayFor(modelItem => item.Product.Price)</td>
+					<td>@Html.DisplayFor(modelItem => item.Quantity)</td>
+					<td>@Html.DisplayFor(modelItem => item.Status)</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+</div>
+
+@if (Model.TotalPage > 1)
+{
+	<nav>
+		<ul class="pagination">
+			@for (int i = 1; i <= Model.TotalPage; i++)
+			{
+				<li class="page-item @(i == Model.CurrentPage ? "active" : "")">
+					<form method="post" asp-page-handler="Paginate">
+						<input type="hidden" name="pageIndex" value="@i" />
+						<button type="submit" class="page-link">@i</button>
+					</form>
+				</li>
+			}
+		</ul>
+	</nav>
+}

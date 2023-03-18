@@ -22,6 +22,9 @@ namespace FurnitureStoreWeb
 			builder.Services.AddScoped<IAccountRepository, AccountRepository>();
 			builder.Services.AddScoped<IAccountService, AccountService>();
 
+			builder.Services.AddScoped<IInStoreProductRepository, InStoreProductRepository>();
+			builder.Services.AddScoped<IInstoreProductService, InStoreProductService>();
+
 			var app = builder.Build();
 
 			// Configure the HTTP request pipeline.

@@ -42,6 +42,9 @@ namespace DataLayer
 
 			modelBuilder.Entity<Store>()
 				.HasMany(s => s.Staffs);
+
+			modelBuilder.Entity<Store>().
+				HasMany(store => store.Products);
 		}
 	}
 }

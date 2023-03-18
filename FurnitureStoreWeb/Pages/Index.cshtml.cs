@@ -15,6 +15,7 @@ namespace FurnitureStoreWeb.Pages
 
 		public IndexModel(IAccountService accountService)
 		{
+			account = new Account();
 			_accountService = accountService;
 		}
 
@@ -28,11 +29,11 @@ namespace FurnitureStoreWeb.Pages
 			var result = _accountService.Login(account.Username, account.Password);
 			if (result != null)
 			{
-				return RedirectToPage("Privacy");
+				return RedirectToPage("InStoreProductList");
 			}
 			else
 			{
-				return RedirectToPage("Error");
+				return RedirectToPage("Unauthorized");
 			}
 		}
 	}

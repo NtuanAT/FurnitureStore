@@ -9,5 +9,7 @@ namespace DataLayer.Repository.Interface
 {
 	public interface IInStoreProductRepository : IRepositoryBase<InStoreProduct>
 	{
+		List<InStoreProduct> GetInStoreProductWithPagingAndInclude(int pageSize, int pageIndex);
+		int Count();
 	}
 }

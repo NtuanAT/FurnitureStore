@@ -44,5 +44,10 @@ namespace DataLayer.Repository.Implement
             return _storeDBContext.SaveChanges() > 0;
         }
 
+        public List<T> GetAllPaging(int pageSize, int pageIndex)
+        {
+            return _dbSet.Skip(pageSize*(pageIndex - 1)).Take(pageSize).ToList();
+        }
+
     }
 }

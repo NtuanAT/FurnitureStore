@@ -19,6 +19,7 @@ namespace DataLayer.Entities
 		[Required]
 		public string Location { get; set; }
 		public StoreStatus Status { get; set; }
+		public List<InStoreProduct> Products { get; set; }
 	}
 
 	public enum StoreStatus
