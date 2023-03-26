@@ -76,3 +76,27 @@ h3 {
     .btn:hover {
         background-color: #0056b3;
     }
+
+.store-container {
+    display: inline-block;
+    width: 250px;
+    height: 250px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px;
+    box-sizing: border-box;
+    text-align: center;
+    vertical-align: top;
+    background-color: #f8f8f8;
+}
+
+.store-title {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.store-location {
+    margin-bottom: 20px;
+}
+
+

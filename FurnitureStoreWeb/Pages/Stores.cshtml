@@ -5,28 +5,16 @@
     ViewData["Title"] = "Choose Store";
 }
 
+
 <h2>Choose a Store</h2>
 
 <div>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Store Name</th>
-                <th>Location</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var store in Model.Stores)
-            {
-                <tr>
-                    <td>@store.StoreName</td>
-                    <td>@store.Location</td>
-                    <td>
-                        <a asp-page="VisitStore" asp-route-storeId="@store.StoreID" class="btn btn-primary">Visit Store</a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    @foreach (var store in Model.Stores)
+    {
+        <div class="store-container">
+            <div class="store-title">@store.StoreName</div>
+            <div class="store-location">@store.Location</div>
+            <a asp-page="StorePage" asp-route-storeId="@store.StoreID" class="btn">Visit Store</a>
+        </div>
+    }
 </div>
