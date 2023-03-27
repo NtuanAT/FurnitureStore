@@ -1,0 +1,49 @@
+﻿@page
+@model FurnitureStoreWeb.Pages.Admin.InStoreProductManagement.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>InStoreProduct</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.InStoreProduct.Product.ProductName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.InStoreProduct.Product.ProductName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.InStoreProduct.Product.Category)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.InStoreProduct.Product.Category)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.InStoreProduct.Quantity)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.InStoreProduct.Quantity)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.InStoreProduct.Product.Price)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.InStoreProduct.Product.Price)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.InStoreProduct.Status)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.InStoreProduct.Status)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.InStoreProduct?.InStoreProductID">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

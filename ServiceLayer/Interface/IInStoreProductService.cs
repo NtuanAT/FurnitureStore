@@ -10,5 +10,10 @@ namespace ServiceLayer.Interface
 	public interface IInStoreProductService
 	{
 		List<InStoreProduct> GetAllProductsInStore(Guid storeId);
+
+		InStoreProduct GetProductInStore(Guid productId);
+		bool DeActivateProductInStore(InStoreProduct inStoreProduct);
+		bool UpdateTrackedInStoreProduct(InStoreProduct inStoreProduct);
+		bool CreateInStoreProduct(InStoreProduct inStoreProduct);
 	}
 }
