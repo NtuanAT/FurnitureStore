@@ -8,14 +8,20 @@ namespace FurnitureStoreWeb.Pages
     public class StorePageModel : PageModel
     {
         private readonly IInStoreProductService _inStoreProductService;
-        public StorePageModel(IInStoreProductService inStoreProductService)
+		private readonly IAccountService _accountService;
+
+		public StorePageModel(IInStoreProductService inStoreProductService,
+            IAccountService accountService)
         {
 			_inStoreProductService = inStoreProductService;
-        }
+			_accountService = accountService;
+		}
         public List<InStoreProduct> Products { get; set; }
-        public async Task OnGetAsync(Guid storeId)
+        public Account Account { get; set; }
+        public async Task OnGetAsync(Guid storeId, Guid accountId)
         {
             Products = await GetInStoreProducts(storeId);
+            Account = _accountService.GetById(accountId);
         }
 
         async Task<List<InStoreProduct>> GetInStoreProducts(Guid storeId)
