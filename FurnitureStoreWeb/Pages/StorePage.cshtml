@@ -4,5 +4,50 @@
 	ViewData["Title"] = "Furniture Store";
 }
 
-<h1>Đây là trang chủ</h1>
+<h1>Welcome to Your Furniture Store</h1>
+
+@*Show the Products list*@
+
+<h2>Products</h2>
+<div class="product-container">
+	@foreach (var product in Model.Products)
+	{
+		<div class="product-card">
+			<div class="product-details">
+				<h3>@product.Product.ProductName</h3>
+				<span>Price: @product.Product.Price</span>
+				<span>In Store: @product.Quantity</span>
+				<div class="product-more-details" hidden>
+					<span>Material: Gỗ</span>
+					<span>Dimensions: Đứng</span>
+					<span>Color: Trắng</span>
+				</div>
+				<div class="product-actions">
+					<button class="btn">View Detail</button>
+				</div>
+				<div class="product-actions">
+					<button class="btn">Add to Cart</button>
+				</div>
+			</div>
+		</div>
+	}
+</div>
+@section Scripts {
+	<script>
+		document.addEventListener('DOMContentLoaded', function () {
+			const viewDetailButtons = document.querySelectorAll('.btn');
+
+			viewDetailButtons.forEach(function (button) {
+				button.addEventListener('click', function (event) {
+					const productCard = event.target.closest('.product-card');
+					productCard.classList.toggle('expanded');
+					const moreDetails = productCard.querySelector('.product-more-details');
+					moreDetails.toggleAttribute('hidden');
+				});
+			});
+		});
+
+		
+	</script>
+}
 

@@ -1,5 +1,6 @@
 ﻿using DataLayer.Entities;
 using DataLayer.Repository.Interface;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,11 @@ namespace DataLayer.Repository.Implement
 	{
 		public InStoreProductRepository(StoreDBContext context) : base(context)
 		{
+		}
+
+		public List<InStoreProduct> GetAllWithRelative()
+		{
+			return _dbSet.Include(i=>i.Product).Include(i=>i.Store).ToList();
 		}
 	}
 }
