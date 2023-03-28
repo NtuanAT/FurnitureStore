@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 
 namespace DataLayer.Repository.Interface
 {
-	public interface IInStoreProductRepository : IRepositoryBase<InStoreProduct>
+	public interface IWareHouseRepository : IRepositoryBase<Warehouse>
 	{
-		List<InStoreProduct> GetAllProductInPlace(Guid placeID);
-		bool UpdateAmount(Guid id, int amount);
+		List<Warehouse> GetAll();
+		Warehouse GetByID(Guid id);
+		bool UpdateProductQuantityy(Product type, int quantity);
 	}
 }

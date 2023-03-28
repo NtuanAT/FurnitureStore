@@ -14,10 +14,9 @@ namespace DataLayer.Entities
 		public Guid InStoreProductID { get; set; }
 		public Guid ProductID { get; set; }
 		public Product Product { get; set; }
-		public Guid StoreID { get; set; }
-		public Store Store { get; set; }
 		public int Quantity { get; set; }
 		public ProductStatus Status { get; set; }
+		public Guid BelongTo { get; set; }
 	}
 
 
