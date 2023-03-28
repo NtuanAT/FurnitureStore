@@ -13,5 +13,13 @@ namespace DataLayer.Repository.Implement
 		public InStoreProductRepository(StoreDBContext context) : base(context)
 		{
 		}
+<<<<<<< HEAD
+=======
+
+		public List<InStoreProduct> GetAllWithRelative()
+		{
+			return _dbSet.Include(i=>i.Product).Include(i=>i.Store).ToList();
+		}
+>>>>>>> parent of a5a02de (Add CRUD for InStoreProduct and Product)
 	}
 }

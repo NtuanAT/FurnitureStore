@@ -9,5 +9,9 @@ namespace DataLayer.Repository.Interface
 {
 	public interface IInStoreProductRepository : IRepositoryBase<InStoreProduct>
 	{
+<<<<<<< HEAD
+=======
+		List<InStoreProduct> GetAllWithRelative();
+>>>>>>> parent of a5a02de (Add CRUD for InStoreProduct and Product)
 	}
 }
