@@ -1,5 +1,6 @@
 ﻿using DataLayer.Entities;
 using DataLayer.Repository.Interface;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,13 +14,26 @@ namespace DataLayer.Repository.Implement
 		public InStoreProductRepository(StoreDBContext context) : base(context)
 		{
 		}
-<<<<<<< HEAD
-=======
 
-		public List<InStoreProduct> GetAllWithRelative()
+		public List<InStoreProduct> GetAllProductInPlace(Guid placeID)
 		{
-			return _dbSet.Include(i=>i.Product).Include(i=>i.Store).ToList();
+			return _dbSet.Where(ip => ip.BelongTo.Equals(placeID)).Include(ip => ip.Product).ToList();
+
 		}
->>>>>>> parent of a5a02de (Add CRUD for InStoreProduct and Product)
+
+		public bool UpdateAmount(Guid id, int amount)
+		{
+			var result = _dbSet.FirstOrDefault(x => x.InStoreProductID == id);
+			if (result == null)
+			{
+				return false;
+			}
+			else
+			{
+				result.Quantity += amount;
+				_dbSet.Update(result);
+				return _storeDBContext.SaveChanges() > 0;
+			}
+		}
 	}
 }

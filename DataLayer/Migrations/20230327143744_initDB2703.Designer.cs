@@ -4,6 +4,7 @@ using DataLayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataLayer.Migrations
 {
     [DbContext(typeof(StoreDBContext))]
-    partial class StoreDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230327143744_initDB2703")]
+    partial class initDB2703
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -67,9 +70,6 @@ namespace DataLayer.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("BelongTo")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<Guid>("ProductID")
                         .HasColumnType("uniqueidentifier");
 
@@ -79,9 +79,19 @@ namespace DataLayer.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
+                    b.Property<Guid>("StoreID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("WareHouseID")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("InStoreProductID");
 
                     b.HasIndex("ProductID");
+
+                    b.HasIndex("StoreID");
+
+                    b.HasIndex("WareHouseID");
 
                     b.ToTable("inStoreProducts");
                 });
@@ -181,7 +191,19 @@ namespace DataLayer.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("DataLayer.Entities.Store", "Store")
+                        .WithMany("Products")
+                        .HasForeignKey("StoreID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DataLayer.Entities.Warehouse", null)
+                        .WithMany("products")
+                        .HasForeignKey("WareHouseID");
+
                     b.Navigation("Product");
+
+                    b.Navigation("Store");
                 });
 
             modelBuilder.Entity("DataLayer.Entities.Warehouse", b =>
@@ -202,10 +224,17 @@ namespace DataLayer.Migrations
 
             modelBuilder.Entity("DataLayer.Entities.Store", b =>
                 {
+                    b.Navigation("Products");
+
                     b.Navigation("Staffs");
 
                     b.Navigation("StoreAdmin")
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("DataLayer.Entities.Warehouse", b =>
+                {
+                    b.Navigation("products");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,3 +1,4 @@
+using AutoMapper;
 using DataLayer;
 using DataLayer.Repository.Implement;
 using DataLayer.Repository.Interface;
@@ -16,8 +17,15 @@ namespace FurnitureStoreWeb
 			builder.Services.AddRazorPages();
 			builder.Services.AddSession();
 			builder.Services.AddDbContext<StoreDBContext>();
+			builder.Services.AddAutoMapper(typeof(Mapper));
 
 			builder.Services.AddScoped(typeof(IRepositoryBase<>), typeof(RepositoryBase<>));
+
+			builder.Services.AddScoped<IInStoreProductRepository, InStoreProductRepository>();
+			builder.Services.AddScoped<IInstoreProductService, InstoreProductService>();
+
+			builder.Services.AddScoped<IWareHouseRepository, WareHouseRepository>();
+			builder.Services.AddScoped<IWareHouseService, WareHouseService>();
 
 			builder.Services.AddScoped<IAccountRepository, AccountRepository>();
 			builder.Services.AddScoped<IAccountService, AccountService>();

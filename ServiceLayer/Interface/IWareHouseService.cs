@@ -8,8 +8,10 @@ using System.Threading.Tasks;
 
 namespace ServiceLayer.Interface
 {
-    public interface IStoreService
-    {
-        List<StoreServiceModel> GetAll();
-    }
+	public interface IWareHouseService
+	{
+		List<WareHouseServiceModel> GetAll();
+		Warehouse GetByID(Guid id);
+		bool UpdateProductQuantityy(Product type, int quantity);
+	}
 }

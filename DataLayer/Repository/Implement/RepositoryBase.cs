@@ -11,7 +11,7 @@ namespace DataLayer.Repository.Implement
 {
     public class RepositoryBase<T> : IRepositoryBase<T> where T:class 
     {
-        private StoreDBContext _storeDBContext;
+        protected StoreDBContext _storeDBContext;
         protected DbSet<T> _dbSet { get; set; }
         
         public RepositoryBase(StoreDBContext context)
