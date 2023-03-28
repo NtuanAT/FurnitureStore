@@ -10,12 +10,10 @@ namespace DataLayer.Repository.Interface
 	public interface IRepositoryBase<T> where T : class
 	{
 		public T Get(Expression<Func<T, bool>> predicate);
-		public bool Delete(Expression<Func<T, bool>> predicate);
+		public void Delete(Expression<Func<T, bool>> predicate);
 		public bool Update(T entity);
 		public List<T> GetAll();
 		public bool Create(T entity);
-		public bool UpdateTrackedEntity<T>(T entity);
-
-    }
+	}
 		
 }

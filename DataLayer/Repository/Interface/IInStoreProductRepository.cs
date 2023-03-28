@@ -9,8 +9,5 @@ namespace DataLayer.Repository.Interface
 {
 	public interface IInStoreProductRepository : IRepositoryBase<InStoreProduct>
 	{
-		List<InStoreProduct> GetAllWithRelative();
-		InStoreProduct GetByIdWithRelative(Guid productId);
-		bool DeActivateProductInStore(InStoreProduct inStoreProduct);
 	}
 }

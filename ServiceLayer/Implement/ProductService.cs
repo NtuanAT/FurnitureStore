@@ -23,24 +23,5 @@ namespace ServiceLayer.Implement
             return products;
             
 		}
-
-        public Product GetProductById(Guid productId)
-        {
-            return _productRepository.Get(p => p.ProductID.Equals(productId));
-        }
-
-        public bool UpdateTrackedProduct(Product product)
-        {
-            return _productRepository.UpdateTrackedEntity<Product>(product);
-        }
-        public bool CreateProduct(Product product)
-        {
-            return _productRepository.Create(product);
-        }
-        public bool DeleteProduct(Guid productId)
-        {
-            return _productRepository.Delete(p => p.ProductID.Equals(productId));
-        }
-
-    }
+	}
 }
