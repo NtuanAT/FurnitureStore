@@ -11,5 +11,6 @@ namespace DataLayer.Repository.Interface
 	{
 		List<InStoreProduct> GetAllProductInPlace(Guid placeID);
 		bool UpdateAmount(Guid id, int amount);
+
 	}
 }
