@@ -19,6 +19,7 @@ namespace DataLayer.Entities
 		public int AccountStatus { get; set; }
         public Guid? StaffStoreID { get; set; }
         public Store StaffStore { get; set; }
+
         public Guid? AdminStoreID { get; set; }
         public Store AdminStore { get; set; }
     }

@@ -16,6 +16,12 @@ namespace ServiceLayer.Implement
 		{
 			_accountRepository = accountRepository;
 		}
+
+		public Account GetById(Guid id)
+		{
+			return _accountRepository.Get(a => a.AccountID == id);
+		}
+
 		public Account Login(string username, string password)
 		{
 			return _accountRepository.Login(username, password);

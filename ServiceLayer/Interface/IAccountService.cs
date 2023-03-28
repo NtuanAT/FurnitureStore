@@ -10,5 +10,6 @@ namespace ServiceLayer.Interface
 	public interface IAccountService
 	{
 		Account Login(string username, string password);
+		Account GetById(Guid id);
 	}
 }
