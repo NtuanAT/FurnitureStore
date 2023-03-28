@@ -54,7 +54,7 @@ namespace ServiceLayer.Implement
 		{
 			WareHouseServiceModel result = new WareHouseServiceModel();
 			result.WareHouseID = source.WareHouseID;
-			result.Admin = source.Admin;
+			//result.Admin = source.Admin;
 			result.Name = source.Name;
 			result.Location = source.Location;
 			result.products = new List<InStoreProduct>();
@@ -67,7 +67,7 @@ namespace ServiceLayer.Implement
 			Warehouse result = new Warehouse();
 
 			result.WareHouseID = source.WareHouseID;
-			result.Admin = source.Admin;
+			//result.Admin = source.Admin;
 			result.Name = source.Name;
 			result.Location = source.Location;
 
