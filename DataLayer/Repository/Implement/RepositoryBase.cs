@@ -26,7 +26,12 @@ namespace DataLayer.Repository.Implement
         }
         public void Delete(Expression<Func<T, bool>> predicate)
         {
-
+            var objectToremove = _dbSet.Where(predicate).FirstOrDefault();
+            if (objectToremove != null)
+            {
+                _dbSet.Remove(objectToremove);
+            }
+            _storeDBContext.SaveChanges();
         }
         public bool Update(T entity)
         {

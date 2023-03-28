@@ -10,5 +10,7 @@ namespace DataLayer.Repository.Interface
 	public interface IAccountRepository : IRepositoryBase<Account>
 	{
 		Account Login(string username, string password);
-	}
+        Account GetDetails(Guid id);
+    }
+
 }

@@ -55,10 +55,10 @@ namespace DataLayer
                 .HasOne(wh => wh.Admin);
 
             //#region Seed Data
-            //modelBuilder.SeedAccount();
-            //modelBuilder.SeedStore();
-            //modelBuilder.SeedProduct();
-            //modelBuilder.SeedInStoreProduct();
+            modelBuilder.SeedAccount();
+            modelBuilder.SeedStore();
+            modelBuilder.SeedProduct();
+            modelBuilder.SeedInStoreProduct();
             //#endregion
 
         }
