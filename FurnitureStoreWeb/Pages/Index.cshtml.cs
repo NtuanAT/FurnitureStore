@@ -3,6 +3,7 @@ using DataLayer.Repository.Interface;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ServiceLayer.Interface;
+using System.Text.Json;
 
 namespace FurnitureStoreWeb.Pages
 {
@@ -28,7 +29,20 @@ namespace FurnitureStoreWeb.Pages
 			var result = _accountService.Login(account.Username, account.Password);
 			if (result != null)
 			{
-				return RedirectToPage("Stores");
+
+                if (result.Role == AccountRole.Admin)
+                {
+                    var serializedObject = JsonSerializer.Serialize(result);
+
+                    // Set session object
+                    HttpContext.Session.SetString("AdminAccount", serializedObject);
+
+
+
+                    return RedirectToPage("Admin/ProductManagement/Index");
+                }
+
+                return RedirectToPage("Stores");
 			}
 			else
 			{
