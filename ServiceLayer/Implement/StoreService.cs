@@ -25,8 +25,8 @@ namespace ServiceLayer.Implement
 
 		public List<StoreServiceModel> GetAll()
 		{
-			var entites = new List<Store>();
-			entites = _storeRepository.GetAll();
+			
+			var entites = _storeRepository.GetAll();
 
 			var result = new List<StoreServiceModel>();
 			foreach (var item in entites)
