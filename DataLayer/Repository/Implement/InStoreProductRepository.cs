@@ -15,9 +15,25 @@ namespace DataLayer.Repository.Implement
 		{
 		}
 
-		public List<InStoreProduct> GetAllWithRelative()
+		public List<InStoreProduct> GetAllProductInPlace(Guid placeID)
 		{
-			return _dbSet.Include(i=>i.Product).Include(i=>i.Store).ToList();
+			return _dbSet.Where(ip => ip.BelongTo.Equals(placeID)).Include(ip => ip.Product).ToList();
+
+		}
+
+		public bool UpdateAmount(Guid id, int amount)
+		{
+			var result = _dbSet.FirstOrDefault(x => x.InStoreProductID == id);
+			if (result == null)
+			{
+				return false;
+			}
+			else
+			{
+				result.Quantity += amount;
+				_dbSet.Update(result);
+				return _storeDBContext.SaveChanges() > 0;
+			}
 		}
 	}
 }

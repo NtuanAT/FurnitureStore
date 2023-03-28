@@ -1,0 +1,704 @@
+﻿@page
+@model FurnitureStoreWeb.Pages.TransferPageModel
+@{
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Transfer Page</title>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+			font-family: Arial, sans-serif;
+		}
+
+		.transfer-container {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			height: 100vh;
+			position: relative;
+		}
+
+		.transfer-title {
+			margin-top: 50px;
+			display: flex;
+			align-items: center;
+		}
+
+			.transfer-title h1 {
+				margin: 0;
+			}
+
+		.transfer-search {
+			position: absolute;
+			top: 0;
+			left: 0;
+			display: flex;
+			align-items: center;
+			padding: 20px;
+			box-sizing: border-box;
+		}
+
+			.transfer-search input[type="text"] {
+				padding: 10px;
+				border-radius: 5px;
+				border: none;
+				font-size: 16px;
+			}
+
+			.transfer-search button[type="submit"] {
+				background-color: #4CAF50;
+				color: white;
+				padding: 10px 20px;
+				border: none;
+				border-radius: 5px;
+				font-size: 16px;
+				cursor: pointer;
+				transition: background-color 0.3s ease;
+				margin-left: 10px;
+			}
+
+				.transfer-search button[type="submit"]:hover {
+					background-color: #3e8e41;
+				}
+
+		.transfer-row {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			justify-content: center;
+			width: 80%;
+			height: 60%;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			padding: 20px;
+			box-sizing: border-box;
+			margin-bottom: 20px;
+			overflow: auto;
+			position: relative;
+		}
+
+		.transfer-search ~ .transfer-row {
+			margin-top: 80px;
+		}
+
+		.transfer-col {
+			flex: 1;
+			padding: 10px;
+			box-sizing: border-box;
+			text-align: center;
+		}
+
+		.transfer-btn {
+			background-color: #4CAF50;
+			color: white;
+			padding: 10px 20px;
+			border: none;
+			border-radius: 5px;
+			font-size: 16px;
+			cursor: pointer;
+			transition: background-color 0.3s ease;
+		}
+
+			.transfer-btn:hover {
+				background-color: #3e8e41;
+			}
+
+		.transfer-square {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			justify-content: space-between;
+			background-color: #f1f1f1;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			padding: 10px;
+			box-sizing: border-box;
+			margin-bottom: 10px;
+		}
+
+		.transfer-square-selected {
+			background-color: #ddd; /* change background color */
+			border: 1px solid #999; /* change border color */
+			box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* add box shadow */
+		}
+
+		.transfer-square-field {
+			flex: 1;
+			margin-right: 10px;
+		}
+
+			.transfer-square-field:last-child {
+				margin-right: 0;
+			}
+
+			.transfer-square-field input[type="text"] {
+				border: none;
+				background-color: transparent;
+				font-size: 16px;
+				width: 100%;
+				margin-bottom: 5px;
+			}
+	</style>
+</head>
+<body>
+	<div class="transfer-container">
+		<div class="transfer-search">
+			<input type="text" placeholder="Type of product to transfer..." id="productNameSearch">
+			<button type="submit">Search</button>
+		</div>
+		<div class="transfer-title">
+			<h1>Transfer Page</h1>
+		</div>
+		<div class="transfer-row">
+			<div class="transfer-col" id="warehouseContainer">
+				<div class="transfer-square">
+					<div class="transfer-square-field">
+						<label for="store-name">Store Name</label>
+						<input type="text" id="store-name" readonly>
+					</div>
+					<div class="transfer-square-field">
+						<label for="store-location">Location</label>
+						<input type="text" id="store-location" readonly>
+					</div>
+					<div class="transfer-square-field">
+						<label for="quantity">Quantity</label>
+						<input type="text" id="quantity" readonly>
+					</div>
+				</div>
+				<!-- Left column content here -->
+			</div>
+			<div class="transfer-col" id="storeContainer">
+				<div class="transfer-square">
+					<div class="transfer-square-field">
+						<label for="store-name2">Store Name</label>
+						<input type="text" id="store-name2" readonly>
+					</div>
+					<div class="transfer-square-field">
+						<label for="store-location2">Location</label>
+						<input type="text" id="store-location2" readonly>
+					</div>
+					<div class="transfer-square-field">
+						<label for="quantity2">Quantity</label>
+						<input type="text" id="quantity2" readonly>
+					</div>
+				</div>
+				<!-- Right column content here -->
+			</div>
+		</div>
+		<button type="button" class="transfer-btn" id="openModalButton">Transfer</button>
+	</div>
+
+	<!-- Modal -->
+	<div class="modal fade" id="transferModal" tabindex="-1" role="dialog" aria-labelledby="transferModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="transferModalLabel">Transfer Furniture</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="productSelect">Product:</label>
+						<select class="form-control" id="productSelect">
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="quantityInput">Quantity:</label>
+						<input type="number" class="form-control" id="quantityInput" placeholder="Enter quantity">
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" id="transferButton">Transfer</button>
+					<button type="button" class="btn btn-secondary" id="modalCloseButton">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
+
+
+@*This page JS variable*@
+<script>
+	var selectedWarehouse;
+	var selectedStore;
+	var selectedProducType;
+
+	var storeList = [];
+	var wareHouseList = [];
+	var productList = [];
+</script>
+
+@*Document Ready Function*@
+<script>
+	$(document).ready(async function () {
+
+		await AjaxGetAll();
+
+		Render(productList);
+	});
+</script>
+
+@*AJAX call to get all warehouse and store*@
+<script>
+	async function AjaxGetAll() {
+		try {
+			const response = await $.ajax({
+				url: '/TransferPage?handler=DocumentReady',
+				type: 'GET'
+			});
+
+			if (response.status) {
+				var lists = JSON.parse(response.lists);
+
+				for (store of lists.stores) {
+					storeList.push({
+						storeID: store.StoreID,
+						storeName: store.StoreName,
+						location: store.Location,
+						products: store.products
+					});
+				};
+
+				for (warehouse of lists.warehouses) {
+					wareHouseList.push({
+						warehouseID: warehouse.WareHouseID,
+						warehouseName: warehouse.Name,
+						location: warehouse.Location,
+						products: warehouse.products
+					});
+				};
+
+				for (product of lists.products) {
+					productList.push({
+						productID: product.ProductID,
+						productName: product.ProductName,
+						category: product.Category,
+						price: product.Price
+					});
+				};
+
+			} else {
+				alert("Error: " + response.errorMessage);
+			}
+		} catch (error) {
+			alert("Error: " + error);
+		}
+	}
+
+</script>
+
+@*Suggestions scripts*@
+<script>
+	const input = document.getElementById('productNameSearch');
+
+	input.addEventListener('input', () => {
+		const inputValue = input.value.toLowerCase();
+		const filteredProducts = productList.filter(productName => product.ProductName.toLowerCase().includes(inputValue));
+
+		Render(filteredProducts);
+	});
+</script>
+
+@*Render warehouse column and store column*@
+<script>
+	function Render(productTypes) {
+
+		const warehouseCol = document.getElementById('warehouseContainer');
+		warehouseCol.innerHTML = '';
+
+		const storeCol = document.getElementById('storeContainer');
+		storeCol.innerHTML = '';
+
+		var tempStores = [];
+		for (var store of storeList) {
+			for (var productType of productTypes) {
+				for (var product of store.products) {
+					if (product.ProductID == productType.productID) {
+						tempStores.push(store);
+						break;
+					}
+				}
+			}
+		}
+
+
+		var tempWarehouses = [];
+		for (var warehouse of wareHouseList) {
+			for (var productType of productTypes) {
+				for (var product of warehouse.products) {
+					if (product.ProductID == productType.productID) {
+						tempWarehouses.push(warehouse);
+						break;
+					}
+				}
+			}
+		}
+
+		// Create elements for stores
+		for (var store of tempStores) {
+			// Create container for store information
+			var storeSquare = document.createElement('div');
+			storeSquare.classList.add('transfer-square');
+			storeSquare.classList.add('store-square');
+
+			// Create fields for store information
+			var storeIDInput = document.createElement('input');
+			storeIDInput.setAttribute('type', 'hidden');
+			storeIDInput.setAttribute('name', 'storeID');
+			storeIDInput.setAttribute('value', store.storeID);
+			storeSquare.appendChild(storeIDInput);
+
+			var storeNameField = document.createElement('div');
+			storeNameField.classList.add('transfer-square-field');
+			var storeNameLabel = document.createElement('label');
+			storeNameLabel.setAttribute('for', 'store-name');
+			storeNameLabel.innerHTML = 'Store Name';
+			var storeNameInput = document.createElement('input');
+			storeNameInput.setAttribute('type', 'text');
+			storeNameInput.setAttribute('id', 'store-name');
+			storeNameInput.setAttribute('readonly', true);
+			storeNameInput.style.textAlign = 'center';
+			storeNameInput.value = store.storeName;
+			storeNameField.appendChild(storeNameLabel);
+			storeNameField.appendChild(storeNameInput);
+
+			var storeLocationField = document.createElement('div');
+			storeLocationField.classList.add('transfer-square-field');
+			var storeLocationLabel = document.createElement('label');
+			storeLocationLabel.setAttribute('for', 'store-location');
+			storeLocationLabel.innerHTML = 'Location';
+			var storeLocationInput = document.createElement('input');
+			storeLocationInput.setAttribute('type', 'text');
+			storeLocationInput.setAttribute('id', 'store-location');
+			storeLocationInput.setAttribute('readonly', true);
+			storeLocationInput.style.textAlign = 'center';
+			storeLocationInput.value = store.location;
+			storeLocationField.appendChild(storeLocationLabel);
+			storeLocationField.appendChild(storeLocationInput);
+
+			var storeQuantityField = document.createElement('div');
+			storeQuantityField.classList.add('transfer-square-field');
+			var storeQuantityLabel = document.createElement('label');
+			storeQuantityLabel.setAttribute('for', 'quantity');
+			storeQuantityLabel.innerHTML = 'Quantity';
+			var storeQuantityInput = document.createElement('input');
+			storeQuantityInput.setAttribute('type', 'text');
+			storeQuantityInput.setAttribute('id', 'quantity');
+			storeQuantityInput.setAttribute('readonly', true);
+
+			var thisQuantity = 0;
+
+			for (var productType of productTypes) {
+				for (var product of store.products) {
+					if (product.Product.ProductID == productType.productID) {
+						thisQuantity = product.Quantity
+					}
+				}
+			}
+
+
+			storeQuantityInput.style.textAlign = 'center';
+			storeQuantityInput.value = thisQuantity;
+
+			storeQuantityField.appendChild(storeQuantityLabel);
+			storeQuantityField.appendChild(storeQuantityInput);
+
+			// Append fields to container and container to store container div
+			storeSquare.appendChild(storeNameField);
+			storeSquare.appendChild(storeLocationField);
+			storeSquare.appendChild(storeQuantityField);
+			document.getElementById('storeContainer').appendChild(storeSquare);
+		}
+
+
+		// Create elements for warehouses
+		for (var warehouse of tempWarehouses) {
+			// Create container for warehouse information
+			var warehouseSquare = document.createElement('div');
+			warehouseSquare.classList.add('transfer-square');
+			warehouseSquare.classList.add('warehouse-square');
+
+			// Create fields for warehouse information
+			var warehouseIDInput = document.createElement('input');
+			warehouseIDInput.setAttribute('type', 'hidden');
+			warehouseIDInput.setAttribute('name', 'warehouseID');
+			warehouseIDInput.setAttribute('value', warehouse.warehouseID);
+			warehouseSquare.appendChild(warehouseIDInput);
+
+
+			var warehouseNameField = document.createElement('div');
+			warehouseNameField.classList.add('transfer-square-field');
+			var warehouseNameLabel = document.createElement('label');
+			warehouseNameLabel.setAttribute('for', 'store-name');
+			warehouseNameLabel.innerHTML = 'Warehouse Name';
+			var warehouseNameInput = document.createElement('input');
+			warehouseNameInput.setAttribute('type', 'text');
+			warehouseNameInput.setAttribute('id', 'store-name');
+			warehouseNameInput.setAttribute('readonly', true);
+			warehouseNameInput.style.textAlign = 'center';
+			warehouseNameInput.value = warehouse.warehouseName;
+			warehouseNameField.appendChild(warehouseNameLabel);
+			warehouseNameField.appendChild(warehouseNameInput);
+
+			var warehouseLocationField = document.createElement('div');
+			warehouseLocationField.classList.add('transfer-square-field');
+			var warehouseLocationLabel = document.createElement('label');
+			warehouseLocationLabel.setAttribute('for', 'store-location');
+			warehouseLocationLabel.innerHTML = 'Location';
+			var warehouseLocationInput = document.createElement('input');
+			warehouseLocationInput.setAttribute('type', 'text');
+			warehouseLocationInput.setAttribute('id', 'store-location');
+			warehouseLocationInput.setAttribute('readonly', true);
+			warehouseLocationInput.style.textAlign = 'center';
+			warehouseLocationInput.value = warehouse.location;
+			warehouseLocationField.appendChild(warehouseLocationLabel);
+			warehouseLocationField.appendChild(warehouseLocationInput);
+
+			var warehouseQuantityField = document.createElement('div');
+			warehouseQuantityField.classList.add('transfer-square-field');
+			var warehouseQuantityLabel = document.createElement('label');
+			warehouseQuantityLabel.setAttribute('for', 'quantity');
+			warehouseQuantityLabel.innerHTML = 'Quantity';
+			var warehouseQuantityInput = document.createElement('input');
+			warehouseQuantityInput.setAttribute('type', 'text');
+			warehouseQuantityInput.setAttribute('id', 'quantity');
+			warehouseQuantityInput.setAttribute('readonly', true);
+
+			var thisQuantity = 0;
+
+			for (var productType of productTypes) {
+				for (var product of warehouse.products) {
+					if (product.Product.ProductID == productType.productID) {
+						thisQuantity = product.Quantity
+					}
+				}
+			}
+
+			warehouseQuantityInput.style.textAlign = 'center';
+			warehouseQuantityInput.value = thisQuantity;
+
+			warehouseQuantityField.appendChild(warehouseQuantityLabel);
+			warehouseQuantityField.appendChild(warehouseQuantityInput);
+
+			// Append fields to container and container to warehouse container div
+			warehouseSquare.appendChild(warehouseNameField);
+			warehouseSquare.appendChild(warehouseLocationField);
+			warehouseSquare.appendChild(warehouseQuantityField);
+			document.getElementById('warehouseContainer').appendChild(warehouseSquare);
+		}
+
+		SetOnClickListener();
+	}
+</script>
+
+@*Store and warehouse onClick listener*@
+<script>
+
+	function SetOnClickListener() {
+		const storeSquares = document.querySelectorAll('.store-square');
+		const warehouseSquares = document.querySelectorAll('.warehouse-square');
+		var internalSelectedWarehouse = null;
+		var internalSelectedStore = null;
+
+		for (var warehouseSquare of warehouseSquares) {
+			warehouseSquare.addEventListener('click', function () {
+				var id = this.querySelector('input[name="warehouseID"]').value;
+				var isAlreadySelected = (internalSelectedWarehouse !== null && internalSelectedWarehouse.querySelector('input[name="warehouseID"]').value === id);
+
+				if (!isAlreadySelected) {
+					// Unselect previously selected warehouse (if any)
+					if (internalSelectedWarehouse !== null) {
+						internalSelectedWarehouse.classList.remove('transfer-square-selected');
+					}
+
+					internalSelectedWarehouse = this;
+					selectedWarehouse = GetWarehouseByID(id);
+
+					// Change the class of the selected square
+					this.classList.add('transfer-square-selected');
+
+				} else {
+					console.log('Cannot select warehouse:', id);
+				}
+			});
+		}
+
+		for (var storeSquare of storeSquares) {
+			storeSquare.addEventListener('click', function () {
+				var id = this.querySelector('input[name="storeID"]').value;
+				var isAlreadySelected = (internalSelectedStore !== null && internalSelectedStore.querySelector('input[name="storeID"]').value === id);
+
+				if (!isAlreadySelected) {
+					// Unselect previously selected store (if any)
+					if (internalSelectedStore !== null) {
+						internalSelectedStore.classList.remove('transfer-square-selected');
+					}
+
+					internalSelectedStore = this;
+					selectedStore = GetStoreByID(id);
+
+					// Change the class of the selected square
+					this.classList.add('transfer-square-selected');
+				} else {
+					console.log('Cannot select store:', id);
+				}
+			});
+		}
+	}
+
+</script>
+
+@*Get Object by ID*@
+<script>
+	function GetStoreByID(id) {
+		for (var store of storeList) {
+			if (store.storeID === id) {
+				return store;
+			}
+		}
+		return null;
+	}
+
+	function GetWarehouseByID(id) {
+		for (var warehouse of wareHouseList) {
+			if (warehouse.warehouseID === id) {
+				return warehouse;
+			}
+		}
+		return null;
+	}
+</script>
+
+@*Modal script*@
+<script>
+	// Get a reference to the Open Modal button
+	var openModalButton = $('#openModalButton');
+
+	// Get references to the form elements
+	var quantityInput = document.getElementById('quantityInput');
+
+	// Get a reference to the Transfer button
+	var transferButton = document.getElementById('transferButton');
+
+	//Get the select
+	var productSelect = document.getElementById('productSelect');
+
+	//Get close buttom
+	var closeButton = document.getElementById('modalCloseButton');
+
+	// Add an event listener to the Open Modal button
+	openModalButton.on('click', function () {
+		// Show the modal
+		productSelect.innerHTML = '';
+
+		for (var product of selectedWarehouse.products) {
+
+			var newOption = document.createElement('option');
+			quantityInput.value = 1;
+			// Set the text and value properties of the new option element
+			newOption.text = product.Product.ProductName;
+			newOption.value = product.InStoreProductID;
+
+			// Append the new option element to the product select element
+			productSelect.appendChild(newOption);
+		}
+
+		OnSelectedValueChange();
+
+		productSelect.addEventListener('change', function () {
+			OnSelectedValueChange();
+		});
+
+		function OnSelectedValueChange() {
+			// Get the selected product value
+			var selectedProduct = productSelect.value;
+			selectedProducType = productSelect.value;
+
+			// Set the minimum value
+			quantityInput.min = 1;
+			for (product of selectedWarehouse.products) {
+				if (selectedProduct == product.InStoreProductID) {
+					quantityInput.max = product.Quantity;
+				}
+			}
+
+			// Add an input event listener to the quantity input element
+			quantityInput.addEventListener('input', function () {
+				// Get the current value of the quantity input element
+				var currentValue = parseInt(quantityInput.value);
+
+				// Check if the current value is below the minimum value
+				if (currentValue < quantityInput.min) {
+					// Set the value of the quantity input element to the minimum value
+					quantityInput.value = quantityInput.min;
+				}
+				// Check if the current value is below the minimum value
+				if (currentValue > quantityInput.max) {
+					// Set the value of the quantity input element to the minimum value
+					quantityInput.value = quantityInput.max;
+				}
+			});
+		}
+
+		$('#transferModal').modal('show');
+	});
+
+
+	// Add an event listener to the Transfer button
+	transferButton.addEventListener('click', function () {
+		// Get the selected product and quantity
+		var selectedProduct = productSelect.value;
+		var quantity = parseInt(quantityInput.value);
+
+		var selectedwarehouseProductID;
+		var selectedStoreProductID;
+
+		// TODO: Implement the transfer logic here
+
+		for (product of selectedWarehouse.products) {
+			if (product.Product.ProductID == selectedProducType) {
+				selectedwarehouseProductID = product.InStoreProductID;
+			}
+		}
+
+		for (product of selectedStore.products) {
+			if (product.Product.ProductID == selectedProducType) {
+				selectedStoreProductID = product.InStoreProductID;
+			}
+		}
+
+		$.ajax({
+			url: '/TransferPage?handler=Transfer',
+			type: 'GET',
+			data: {
+				warehouseProductID: selectedwarehouseProductID,
+				storeProductID: selectedStoreProductID,
+				quantity: quantity
+			},
+			success: function (response) {
+				// Close the modal
+				$('#transferModal').modal('hide');
+				window.location.reload();
+			},
+			error: function (response) {
+				alert(response.errorMessage);
+			}
+		});
+
+	});
+
+	closeButton.addEventListener('click', function () {
+		// Close the modal
+		$('#transferModal').modal('hide');
+	});
+
+</script>

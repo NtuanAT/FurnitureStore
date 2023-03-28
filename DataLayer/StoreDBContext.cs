@@ -16,6 +16,7 @@ namespace DataLayer
         public DbSet<Product> products { get; set; }
         public DbSet<InStoreProduct> inStoreProducts { get; set; }
         public DbSet<Store> stores { get; set; }
+        public DbSet<Warehouse> wareHouses { get; set; }
         public StoreDBContext()
         {
 
@@ -35,10 +36,6 @@ namespace DataLayer
                 .WithMany(p => p.InStoreProducts)
                 .HasForeignKey(p => p.ProductID);
 
-            modelBuilder.Entity<InStoreProduct>()
-                .HasOne(i => i.Store)
-                .WithMany(s => s.Products);
-
             modelBuilder.Entity<Product>()
                 .HasMany(p => p.InStoreProducts)
                 .WithOne(i => i.Product);
@@ -54,17 +51,15 @@ namespace DataLayer
                 .HasForeignKey(a => a.StaffStoreID)
                 .IsRequired(false);
 
-            modelBuilder.Entity<Store>()
-				.HasMany(s => s.Products)
-                .WithOne(i => i.Store)
-                .HasForeignKey(i => i.StoreID);
+            modelBuilder.Entity<Warehouse>()
+                .HasOne(wh => wh.Admin);
 
-            #region Seed Data
-            modelBuilder.SeedAccount();
-            modelBuilder.SeedStore();
-            modelBuilder.SeedProduct();
-            modelBuilder.SeedInStoreProduct();
-            #endregion
+            //#region Seed Data
+            //modelBuilder.SeedAccount();
+            //modelBuilder.SeedStore();
+            //modelBuilder.SeedProduct();
+            //modelBuilder.SeedInStoreProduct();
+            //#endregion
 
         }
     }
