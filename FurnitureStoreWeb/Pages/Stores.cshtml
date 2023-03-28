@@ -1,0 +1,20 @@
+﻿@page
+@model FurnitureStoreWeb.Pages.StoresModel
+
+@{
+    ViewData["Title"] = "Choose Store";
+}
+
+
+<h2>Choose a Store</h2>
+
+<div>
+    @foreach (var store in Model.Stores)
+    {
+        <div class="store-container">
+            <div class="store-title">@store.StoreName</div>
+            <div class="store-location">@store.Location</div>
+            <a asp-page="StorePage" asp-route-storeId="@store.StoreID" class="btn">Visit Store</a>
+        </div>
+    }
+</div>
