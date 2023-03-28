@@ -28,7 +28,14 @@ namespace FurnitureStoreWeb.Pages
 			var result = _accountService.Login(account.Username, account.Password);
 			if (result != null)
 			{
-				return RedirectToPage("Stores");
+				if (result.Role == AccountRole.Customer)
+				{
+					return RedirectToPage("Stores");
+				}
+				else
+				{
+					return RedirectToPage("TransferPage");
+				}
 			}
 			else
 			{

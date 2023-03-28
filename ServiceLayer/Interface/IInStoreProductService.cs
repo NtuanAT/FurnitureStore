@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataLayer.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,5 +10,6 @@ namespace ServiceLayer.Interface
 	public interface IInstoreProductService
 	{
 		bool Transfer(Guid warehouseProductID, Guid StoreProductID, int quantity);
+		List<InStoreProduct> GetInStoreProducts(Guid storeID);
 	}
 }

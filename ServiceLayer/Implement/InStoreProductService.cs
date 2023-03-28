@@ -1,4 +1,5 @@
-﻿using DataLayer.Repository.Interface;
+﻿using DataLayer.Entities;
+using DataLayer.Repository.Interface;
 using ServiceLayer.Interface;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,11 @@ namespace ServiceLayer.Implement
 		public InstoreProductService(IInStoreProductRepository repository)
 		{
 			_repository = repository;
+		}
+
+		public List<InStoreProduct> GetInStoreProducts(Guid storeID)
+		{
+			return _repository.GetAllProductInPlace(storeID);
 		}
 
 		public bool Transfer(Guid warehouseProductID, Guid StoreProductID, int quantity)
