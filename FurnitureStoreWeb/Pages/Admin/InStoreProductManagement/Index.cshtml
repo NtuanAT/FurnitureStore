@@ -5,7 +5,18 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>In Store Product Management</h1>
+
+<a href="/Admin/ProductManagement/Index" class="btn btn-primary">Product Management</a>
+<a href="/Admin/InStoreProductManagement/Index" class="btn btn-primary">In-Store Product Management</a>
+
+<form method="post">
+    Product Name: <select asp-for="searchInStoreProduct.Product.ProductName" class="form-control" asp-items="ViewBag.ProductName" required >
+        <option value="">-- Select a product --</option>
+    </select>
+    <button type="submit">Search</button>
+</form>
+
 
 <p>
     <a asp-page="Create">Create New</a>

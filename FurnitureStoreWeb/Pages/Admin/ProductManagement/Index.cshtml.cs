@@ -23,6 +23,8 @@ namespace FurnitureStoreWeb.Pages.Admin.ProductManagement
 
         public IList<Product> Product { get;set; } = default!;
         private Account adminAccount;
+        [BindProperty]
+        public Product searchProduct { get; set; }
 
         public async Task OnGetAsync()
         {
@@ -35,6 +37,22 @@ namespace FurnitureStoreWeb.Pages.Admin.ProductManagement
             {
                 Product = _productService.GetAllByStoreId((Guid)adminAccount.AdminStoreID);
             }
+        }
+
+        public async Task<IActionResult> OnPostAsync()
+        {
+            if (String.IsNullOrWhiteSpace(searchProduct.ProductName))
+            {
+                return NotFound();
+            }
+            // Retrieve session object 
+            string serializedObject = HttpContext.Session.GetString("AdminAccount");
+            adminAccount = JsonSerializer.Deserialize<Account>(serializedObject);
+
+            Product = _productService.GetAllByStoreId((Guid)adminAccount.AdminStoreID);
+            Product = Product.Where(i => i.ProductName.Contains(searchProduct.ProductName)).ToList();
+
+            return Page();
         }
     }
 }
