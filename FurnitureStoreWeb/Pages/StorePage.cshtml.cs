@@ -7,11 +7,11 @@ namespace FurnitureStoreWeb.Pages
 {
     public class StorePageModel : PageModel
     {
-		private readonly IInstoreProductService _instoreProductService;
+		private readonly IInStoreProductService _instoreProductService;
 
 		public Account Account { get; set; }
         public List<InStoreProduct> Products { get; set; }
-        public StorePageModel(IInstoreProductService instoreProductService)
+        public StorePageModel(IInStoreProductService instoreProductService)
         {
 			_instoreProductService = instoreProductService;
 		}
