@@ -1,5 +1,4 @@
-﻿using DataLayer.Entities;
-using DataLayer.Repository.Interface;
+﻿using DataLayer.Repository.Interface;
 using ServiceLayer.Interface;
 using System;
 using System.Collections.Generic;
@@ -9,18 +8,20 @@ using System.Threading.Tasks;
 
 namespace ServiceLayer.Implement
 {
-	public class InStoreProductService : IInStoreProductService
+	public class InstoreProductService : IInstoreProductService
 	{
-		private readonly IInStoreProductRepository _inStoreProductRepository;
-        public InStoreProductService(IInStoreProductRepository inStoreProductRepository)
-        {
-			_inStoreProductRepository = inStoreProductRepository;
-        }
-
-		public List<InStoreProduct> GetAllProductsInStore(Guid storeId)
+		IInStoreProductRepository _repository;
+		public InstoreProductService(IInStoreProductRepository repository)
 		{
-			List<InStoreProduct> inStoreProducts = _inStoreProductRepository.GetAllWithRelative();
-			return inStoreProducts.Where(x => x.StoreID == storeId).ToList();
+			_repository = repository;
+		}
+
+		public bool Transfer(Guid warehouseProductID, Guid StoreProductID, int quantity)
+		{
+			_repository.UpdateAmount(warehouseProductID, quantity*(-1));
+			_repository.UpdateAmount(StoreProductID, quantity);
+
+			return true;
 		}
 	}
 }
