@@ -20,7 +20,7 @@ namespace ServiceLayer.Implement
 
 		public List<InStoreProduct> GetInStoreProducts(Guid storeID)
 		{
-			return _repository.GetAllProductInPlace(storeID);
+			return _inStoreProductRepository.GetAllProductInPlace(storeID);
 		}
 
 		public bool Transfer(Guid warehouseProductID, Guid StoreProductID, int quantity)
