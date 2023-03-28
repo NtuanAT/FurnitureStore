@@ -35,10 +35,6 @@ namespace DataLayer
                 .WithMany(p => p.InStoreProducts)
                 .HasForeignKey(p => p.ProductID);
 
-            modelBuilder.Entity<InStoreProduct>()
-                .HasOne(i => i.Store)
-                .WithMany(s => s.Products);
-
             modelBuilder.Entity<Product>()
                 .HasMany(p => p.InStoreProducts)
                 .WithOne(i => i.Product);
@@ -54,10 +50,6 @@ namespace DataLayer
                 .HasForeignKey(a => a.StaffStoreID)
                 .IsRequired(false);
 
-            modelBuilder.Entity<Store>()
-				.HasMany(s => s.Products)
-                .WithOne(i => i.Store)
-                .HasForeignKey(i => i.StoreID);
 
             #region Seed Data
             modelBuilder.SeedAccount();

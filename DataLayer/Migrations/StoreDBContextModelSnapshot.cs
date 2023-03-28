@@ -17,10 +17,10 @@ namespace DataLayer.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.4")
+                .HasAnnotation("ProductVersion", "6.0.15")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
             modelBuilder.Entity("DataLayer.Entities.Account", b =>
                 {
@@ -148,14 +148,9 @@ namespace DataLayer.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("StoreID")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("InStoreProductID");
 
                     b.HasIndex("ProductID");
-
-                    b.HasIndex("StoreID");
 
                     b.ToTable("inStoreProducts");
 
@@ -165,184 +160,161 @@ namespace DataLayer.Migrations
                             InStoreProductID = new Guid("f3c72cc3-d2e8-4296-bf34-712ddfabd5f9"),
                             ProductID = new Guid("57acf196-c71c-49b0-aad1-a1fe004f23fe"),
                             Quantity = 5,
-                            Status = 1,
-                            StoreID = new Guid("00000000-0000-0000-0000-000000000000")
+                            Status = 1
                         },
                         new
                         {
                             InStoreProductID = new Guid("6bbd1c61-69cb-4de6-b7f6-4c144b62dc4a"),
                             ProductID = new Guid("57acf196-c71c-49b0-aad1-a1fe004f23fe"),
                             Quantity = 3,
-                            Status = 1,
-                            StoreID = new Guid("00000000-0000-0000-0000-000000000000")
+                            Status = 1
                         },
                         new
                         {
                             InStoreProductID = new Guid("90cb0a2d-5da5-4cf4-8e0c-4ecaa1704d4e"),
                             ProductID = new Guid("f32f6db0-fa3d-44b3-98e3-39b2ffc0afc7"),
                             Quantity = 10,
-                            Status = 1,
-                            StoreID = new Guid("00000000-0000-0000-0000-000000000000")
+                            Status = 1
                         },
                         new
                         {
                             InStoreProductID = new Guid("f7a0dd2a-1da5-4f45-b338-59306e48c802"),
                             ProductID = new Guid("f32f6db0-fa3d-44b3-98e3-39b2ffc0afc7"),
                             Quantity = 2,
-                            Status = 0,
-                            StoreID = new Guid("00000000-0000-0000-0000-000000000000")
+                            Status = 0
                         },
                         new
                         {
                             InStoreProductID = new Guid("9ec8c30f-d6c1-47ba-9d62-c2128a7e374a"),
                             ProductID = new Guid("8b36a544-4377-40c7-bb36-7471c14fe502"),
                             Quantity = 20,
-                            Status = 1,
-                            StoreID = new Guid("00000000-0000-0000-0000-000000000000")
+                            Status = 1
                         },
                         new
                         {
                             InStoreProductID = new Guid("ba43d2f9-0763-43fc-9cfc-d37f57f8c7df"),
                             ProductID = new Guid("8b36a544-4377-40c7-bb36-7471c14fe502"),
                             Quantity = 5,
-                            Status = 2,
-                            StoreID = new Guid("00000000-0000-0000-0000-000000000000")
+                            Status = 2
                         },
                         new
                         {
                             InStoreProductID = new Guid("e94db7d1-c1c9-4019-bd31-0ba7d319b361"),
                             ProductID = new Guid("8b36a544-4377-40c7-bb36-7471c14fe502"),
                             Quantity = 10,
-                            Status = 1,
-                            StoreID = new Guid("00000000-0000-0000-0000-000000000000")
+                            Status = 1
                         },
                         new
                         {
                             InStoreProductID = new Guid("a88c904a-760d-40a9-879f-3e05c304d307"),
                             ProductID = new Guid("bd614703-badc-4d12-970a-27c64b59847b"),
                             Quantity = 7,
-                            Status = 1,
-                            StoreID = new Guid("00000000-0000-0000-0000-000000000000")
+                            Status = 1
                         },
                         new
                         {
                             InStoreProductID = new Guid("f57d030b-7b23-463d-8041-e33436c62f0e"),
                             ProductID = new Guid("bd614703-badc-4d12-970a-27c64b59847b"),
                             Quantity = 0,
-                            Status = 0,
-                            StoreID = new Guid("00000000-0000-0000-0000-000000000000")
+                            Status = 0
                         },
                         new
                         {
                             InStoreProductID = new Guid("777e83d8-b996-4186-a7b4-4d4a4c9e21a6"),
                             ProductID = new Guid("2ed1ddce-f6b7-4f50-8636-954aad785bda"),
                             Quantity = 10,
-                            Status = 1,
-                            StoreID = new Guid("00000000-0000-0000-0000-000000000000")
+                            Status = 1
                         },
                         new
                         {
                             InStoreProductID = new Guid("d2d6bfc8-2c3c-42a6-816e-84a8c08e60b5"),
                             ProductID = new Guid("2ed1ddce-f6b7-4f50-8636-954aad785bda"),
                             Quantity = 2,
-                            Status = 1,
-                            StoreID = new Guid("00000000-0000-0000-0000-000000000000")
+                            Status = 1
                         },
                         new
                         {
                             InStoreProductID = new Guid("ee05d814-32c2-47a3-97a3-d6df16d9a72e"),
                             ProductID = new Guid("2ed1ddce-f6b7-4f50-8636-954aad785bda"),
                             Quantity = 5,
-                            Status = 0,
-                            StoreID = new Guid("00000000-0000-0000-0000-000000000000")
+                            Status = 0
                         },
                         new
                         {
                             InStoreProductID = new Guid("6b1c6a60-6a1a-4df5-b0e3-8fb9c93ab55e"),
                             ProductID = new Guid("0314642e-0eda-473a-9f1e-487acea7b191"),
                             Quantity = 15,
-                            Status = 1,
-                            StoreID = new Guid("00000000-0000-0000-0000-000000000000")
+                            Status = 1
                         },
                         new
                         {
                             InStoreProductID = new Guid("5d5d5c5c-1635-4c12-b5d5-babfbac9d0cc"),
                             ProductID = new Guid("0314642e-0eda-473a-9f1e-487acea7b191"),
                             Quantity = 3,
-                            Status = 2,
-                            StoreID = new Guid("00000000-0000-0000-0000-000000000000")
+                            Status = 2
                         },
                         new
                         {
                             InStoreProductID = new Guid("7ee570c1-2b7e-480a-8706-5e6d208fb6b9"),
                             ProductID = new Guid("7f19b793-7023-4751-bcae-b8c25688beef"),
                             Quantity = 3,
-                            Status = 1,
-                            StoreID = new Guid("00000000-0000-0000-0000-000000000000")
+                            Status = 1
                         },
                         new
                         {
                             InStoreProductID = new Guid("f3f30c95-8ba6-4bc6-bc27-fa0e99128a8b"),
                             ProductID = new Guid("7f19b793-7023-4751-bcae-b8c25688beef"),
                             Quantity = 1,
-                            Status = 2,
-                            StoreID = new Guid("00000000-0000-0000-0000-000000000000")
+                            Status = 2
                         },
                         new
                         {
                             InStoreProductID = new Guid("1f2edbe3-23b8-44aa-a812-66607c7bc09e"),
                             ProductID = new Guid("b54d41b5-e213-41ba-8435-b7f3d6234fa7"),
                             Quantity = 10,
-                            Status = 1,
-                            StoreID = new Guid("00000000-0000-0000-0000-000000000000")
+                            Status = 1
                         },
                         new
                         {
                             InStoreProductID = new Guid("9b22f0b2-c7d2-466c-9737-0f68b32aa759"),
                             ProductID = new Guid("b54d41b5-e213-41ba-8435-b7f3d6234fa7"),
                             Quantity = 5,
-                            Status = 1,
-                            StoreID = new Guid("00000000-0000-0000-0000-000000000000")
+                            Status = 1
                         },
                         new
                         {
                             InStoreProductID = new Guid("b0ec7e9d-6d29-47d5-b5bb-1bcb5ed312c5"),
                             ProductID = new Guid("b54d41b5-e213-41ba-8435-b7f3d6234fa7"),
                             Quantity = 0,
-                            Status = 0,
-                            StoreID = new Guid("00000000-0000-0000-0000-000000000000")
+                            Status = 0
                         },
                         new
                         {
                             InStoreProductID = new Guid("dab37d9c-69f5-4d17-991c-8c4dded6901a"),
                             ProductID = new Guid("870bd28d-2b95-4e23-b0f9-0db46e924a87"),
                             Quantity = 2,
-                            Status = 1,
-                            StoreID = new Guid("00000000-0000-0000-0000-000000000000")
+                            Status = 1
                         },
                         new
                         {
                             InStoreProductID = new Guid("3d72d978-9ee9-4e24-a798-01d08d9055f5"),
                             ProductID = new Guid("870bd28d-2b95-4e23-b0f9-0db46e924a87"),
                             Quantity = 1,
-                            Status = 2,
-                            StoreID = new Guid("00000000-0000-0000-0000-000000000000")
+                            Status = 2
                         },
                         new
                         {
                             InStoreProductID = new Guid("66b36a90-2d75-4e9f-ae57-ebe0f17aebc4"),
                             ProductID = new Guid("c1b0c347-ffd4-466e-8966-0fb02971b4ca"),
                             Quantity = 8,
-                            Status = 1,
-                            StoreID = new Guid("00000000-0000-0000-0000-000000000000")
+                            Status = 1
                         },
                         new
                         {
                             InStoreProductID = new Guid("19a69e71-e463-4d11-9e25-d061033b4126"),
                             ProductID = new Guid("c1b0c347-ffd4-466e-8966-0fb02971b4ca"),
                             Quantity = 4,
-                            Status = 2,
-                            StoreID = new Guid("00000000-0000-0000-0000-000000000000")
+                            Status = 2
                         });
                 });
 
@@ -507,15 +479,7 @@ namespace DataLayer.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DataLayer.Entities.Store", "Store")
-                        .WithMany("Products")
-                        .HasForeignKey("StoreID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Product");
-
-                    b.Navigation("Store");
                 });
 
             modelBuilder.Entity("DataLayer.Entities.Product", b =>
@@ -525,8 +489,6 @@ namespace DataLayer.Migrations
 
             modelBuilder.Entity("DataLayer.Entities.Store", b =>
                 {
-                    b.Navigation("Products");
-
                     b.Navigation("Staffs");
 
                     b.Navigation("StoreAdmin")
