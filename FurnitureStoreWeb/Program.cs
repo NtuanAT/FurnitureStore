@@ -22,7 +22,7 @@ namespace FurnitureStoreWeb
 			builder.Services.AddScoped(typeof(IRepositoryBase<>), typeof(RepositoryBase<>));
 
 			builder.Services.AddScoped<IInStoreProductRepository, InStoreProductRepository>();
-			builder.Services.AddScoped<IInstoreProductService, InstoreProductService>();
+			builder.Services.AddScoped<IInStoreProductService, InstoreProductService>();
 
 			builder.Services.AddScoped<IWareHouseRepository, WareHouseRepository>();
 			builder.Services.AddScoped<IWareHouseService, WareHouseService>();
