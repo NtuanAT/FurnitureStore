@@ -55,7 +55,7 @@ namespace FurnitureStoreWeb.Pages.Management
         // For more details, see https://aka.ms/RazorPagesCRUD.
         public IActionResult OnPost()
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 return Page();
             }

@@ -25,7 +25,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Account.Role" class="control-label"></label>
-                <select asp-for="Account.Role" class="form-control"></select>
+                <input asp-for="Account.Role" class="form-control"/>
                 <span asp-validation-for="Account.Role" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -37,8 +37,7 @@
                 <label asp-for="Account.StaffStoreID" class="control-label"></label>
                 <select asp-for="Account.StaffStoreID" class ="form-control" asp-items="ViewBag.StaffStoreID"></select>
             </div>
-            
-            <div class="form-group">
+         <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
