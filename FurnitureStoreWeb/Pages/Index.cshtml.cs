@@ -30,19 +30,20 @@ namespace FurnitureStoreWeb.Pages
 			if (result != null)
 			{
 
+                var serializedObject = JsonSerializer.Serialize(result);
                 if (result.Role == AccountRole.Admin)
                 {
-                    var serializedObject = JsonSerializer.Serialize(result);
-
                     // Set session object
                     HttpContext.Session.SetString("AdminAccount", serializedObject);
-
-
-
                     return RedirectToPage("Admin/ProductManagement/Index");
                 }
-
-                return RedirectToPage("Stores");
+				if(result.Role == AccountRole.Customer)
+				{
+					// Set session object
+					HttpContext.Session.SetString("CustomerAccount", serializedObject);
+					return RedirectToPage("Stores");
+				}
+				return RedirectToPage("Error");
 			}
 			else
 			{

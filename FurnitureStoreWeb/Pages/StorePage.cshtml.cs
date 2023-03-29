@@ -1,6 +1,8 @@
 using DataLayer.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.VisualBasic;
+using Newtonsoft.Json;
 using ServiceLayer.Interface;
 
 namespace FurnitureStoreWeb.Pages
@@ -8,8 +10,7 @@ namespace FurnitureStoreWeb.Pages
     public class StorePageModel : PageModel
     {
 		private readonly IInStoreProductService _instoreProductService;
-
-		public Account Account { get; set; }
+		public Account Customer { get; set; }
         public List<InStoreProduct> Products { get; set; }
         public StorePageModel(IInStoreProductService instoreProductService)
         {
@@ -20,11 +21,15 @@ namespace FurnitureStoreWeb.Pages
         {
 
             Products = await GetProductsInStore((Guid)storeId);
-        }
+			var customer = HttpContext.Session.GetString("CustomerAccount");
+			Customer = JsonConvert.DeserializeObject<Account>(customer);
+		}
 
-        private async Task<List<InStoreProduct>> GetProductsInStore(Guid storeId)
+        
+
+		private async Task<List<InStoreProduct>> GetProductsInStore(Guid storeId)
         {
-            return await Task.FromResult(_instoreProductService.GetInStoreProducts(storeId));
+            return await Task.FromResult(_instoreProductService.GetAllProductsInStore(storeId));
         }
     }
 }
