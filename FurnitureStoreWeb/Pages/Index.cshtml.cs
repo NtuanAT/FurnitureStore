@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
 using ServiceLayer.Interface;
 using System.Text.Json;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace FurnitureStoreWeb.Pages
 {
@@ -29,27 +30,31 @@ namespace FurnitureStoreWeb.Pages
 
 		public IActionResult OnPost()
 		{
+			var result = _accountService.Login(account.Username, account.Password);
+			if (result != null)
+			{
 
-            var result = _accountService.Login(account.Username, account.Password);
-
-            if (result != null)
-            {
-                HttpContext.Session.SetString("LogginUser", JsonConvert.SerializeObject(result));
-                if (result.Role == AccountRole.Admin)
-                {
+                var serializedObject = JsonSerializer.Serialize(result);
+				// Set session object
+				HttpContext.Session.SetString("LoginAccount", serializedObject);
+				if (result.Role == AccountRole.Admin)
+                {                    
                     return RedirectToPage("Admin/AdminHomePage");
                 }
-                else if (result.Role == AccountRole.Staff)
+                if (result.Role == AccountRole.Staff)
                 {
                     return RedirectToPage("StaffHomePage");
                 }
-                return RedirectToPage("Stores");
-            }
-            else
-            {
-                return RedirectToPage("Error");
-            }
-        }
-
+				if(result.Role == AccountRole.Customer)				{
+					
+					return RedirectToPage("Stores");
+				}
+				return RedirectToPage("Error");
+			}
+			else
+			{
+				return RedirectToPage("Error");
+			}
+		}
 	}
 }
