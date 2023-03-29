@@ -88,8 +88,7 @@ namespace FurnitureStoreWeb.Pages
 
             try
             {
-                _instoreService.Transfer(Guid.Parse(warehouseProductID), Guid.Parse(storeProductID), quantity);
-
+				status = _instoreService.Transfer(Guid.Parse(warehouseProductID), Guid.Parse(storeProductID), quantity);
 			}
 			catch(Exception ex)
             {
