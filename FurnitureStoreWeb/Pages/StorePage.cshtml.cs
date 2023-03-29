@@ -21,7 +21,7 @@ namespace FurnitureStoreWeb.Pages
         {
 
             Products = await GetProductsInStore((Guid)storeId);
-			var customer = HttpContext.Session.GetString("CustomerAccount");
+			var customer = HttpContext.Session.GetString("LoginAccount");
 			Customer = JsonConvert.DeserializeObject<Account>(customer);
 		}
 

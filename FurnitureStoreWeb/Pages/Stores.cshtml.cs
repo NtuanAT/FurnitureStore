@@ -24,9 +24,8 @@ namespace FurnitureStoreWeb.Pages
         public async Task OnGetAsync()
         {
             Stores = await GetStoresAsync();
-            var customer = HttpContext.Session.GetString("CustomerAccount");
-            Customer = JsonConvert.DeserializeObject<Account>(customer);
-            
+            var customer = HttpContext.Session.GetString("LoginAccount");
+            Customer = JsonConvert.DeserializeObject<Account>(customer);            
         }
 
         
