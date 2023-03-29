@@ -1,5 +1,6 @@
 ﻿using DataLayer.Entities;
 using DataLayer.Repository.Interface;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,5 +14,24 @@ namespace DataLayer.Repository.Implement
 		public StoreRepository(StoreDBContext context) : base(context)
 		{
 		}
-	}
+
+        public bool CloseStore(Guid storeId)
+        {
+            var updateStore = _dbSet.Find(storeId);
+            if (updateStore != null)
+            {
+                updateStore.Status = StoreStatus.Close;
+                return Update(updateStore);
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public List<Store> GetAllWithRelated()
+        {
+            return _dbSet.Include(x => x.StoreAdmin).ToList();
+        }
+    }
 }

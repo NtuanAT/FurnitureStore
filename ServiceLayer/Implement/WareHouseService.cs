@@ -24,7 +24,19 @@ namespace ServiceLayer.Implement
 			_products = products;
 		}
 
-		public List<WareHouseServiceModel> GetAll()
+        public bool AddWarehouse(WareHouseServiceModel model)
+        {
+			var newWarehouse = ManualMap(model);
+
+            return _repository.Create(newWarehouse);
+        }
+
+        public bool DeleteWarehouse(Guid warehouseId)
+        {
+            return _repository.Delete(w => w.WareHouseID.Equals(warehouseId));
+        }
+
+        public List<WareHouseServiceModel> GetAll()
 		{
 			var entites = new List<Warehouse>();
 			entites = _repository.GetAll();
@@ -50,7 +62,14 @@ namespace ServiceLayer.Implement
 			throw new NotImplementedException();
 		}
 
-		private WareHouseServiceModel ManualMap(Warehouse source)
+        public bool UpdateWarehouse(WareHouseServiceModel model)
+        {
+			var updateWarehouse = ManualMap(model);
+
+            return _repository.Update(updateWarehouse);
+        }
+
+        private WareHouseServiceModel ManualMap(Warehouse source)
 		{
 			WareHouseServiceModel result = new WareHouseServiceModel();
 			result.WareHouseID = source.WareHouseID;

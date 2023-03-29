@@ -10,32 +10,29 @@ using DataLayer.Entities;
 using ServiceLayer.Interface;
 using System.Text.Json;
 
-namespace FurnitureStoreWeb.Pages.Admin.InStoreProductManagement
+namespace FurnitureStoreWeb.Pages.Admin.InWarehouseProductManagement
 {
-    public class DetailsModel : PageModel
+    public class DeleteModel : PageModel
     {
         private readonly IInStoreProductService _inStoreProductService;
 
-        public DetailsModel(IInStoreProductService inStoreProductService)
+        public DeleteModel(IInStoreProductService inStoreProductService)
         {
             _inStoreProductService = inStoreProductService;
         }
 
+        [BindProperty]
         public InStoreProduct InStoreProduct { get; set; } = default!;
-        private Account adminAccount;
 
-        public async Task<IActionResult> OnGetAsync(Guid? id)
+        public IActionResult OnGet(Guid? id)
         {
-            // Retrieve session object 
-            string serializedObject = HttpContext.Session.GetString("AdminAccount");
-            adminAccount = JsonSerializer.Deserialize<Account>(serializedObject);
-
             if (id == null)
             {
                 return NotFound();
             }
 
             var instoreproduct = _inStoreProductService.GetProductInPlace((Guid)id);
+
             if (instoreproduct == null)
             {
                 return NotFound();
@@ -45,6 +42,23 @@ namespace FurnitureStoreWeb.Pages.Admin.InStoreProductManagement
                 InStoreProduct = instoreproduct;
             }
             return Page();
+        }
+
+        public IActionResult OnPost(Guid? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var instoreproduct = _inStoreProductService.GetProductInPlace((Guid)id);
+
+            if (instoreproduct != null)
+            {
+                InStoreProduct = instoreproduct;
+                _inStoreProductService.DeActivateProductInStore(instoreproduct);
+            }
+
+            return RedirectToPage("./Index");
         }
     }
 }

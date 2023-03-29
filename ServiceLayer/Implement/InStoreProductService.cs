@@ -13,10 +13,13 @@ namespace ServiceLayer.Implement
 	public class InstoreProductService : IInStoreProductService
 	{
 		IInStoreProductRepository _inStoreProductRepository;
-		public InstoreProductService(IInStoreProductRepository repository)
+        private readonly IWareHouseRepository _wareHouseRepository;
+
+        public InstoreProductService(IInStoreProductRepository repository, IWareHouseRepository wareHouseRepository)
 		{
 			_inStoreProductRepository = repository;
-		}
+            _wareHouseRepository = wareHouseRepository;
+        }
 
 		public bool Transfer(Guid warehouseProductID, Guid StoreProductID, int quantity)
 		{
@@ -37,7 +40,7 @@ namespace ServiceLayer.Implement
             return inStoreProducts.Where(x => x.BelongTo == storeId).ToList();
         }
 
-        public InStoreProduct GetProductInStore(Guid productId)
+        public InStoreProduct GetProductInPlace(Guid productId)
         {
             return _inStoreProductRepository.GetByIdWithRelative(productId);
         }
@@ -50,6 +53,21 @@ namespace ServiceLayer.Implement
         public bool CreateInStoreProduct(InStoreProduct inStoreProduct)
         {
             return _inStoreProductRepository.Create(inStoreProduct);
+        }
+
+        public List<InStoreProduct> GetAllInWarehouseProducts()
+        {
+            var products = new List<InStoreProduct>();
+
+            var warehouses = _wareHouseRepository.GetAll();
+
+            foreach (var warehouse in warehouses)
+            {
+                var warehouseProducts = _inStoreProductRepository.GetAllProductInPlace(warehouse.WareHouseID);
+                products.AddRange(warehouseProducts);
+            }
+
+            return products;
         }
     }
 }

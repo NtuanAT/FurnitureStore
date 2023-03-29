@@ -36,7 +36,7 @@ namespace FurnitureStoreWeb.Pages.Admin.InStoreProductManagement
                 return NotFound();
             }
 
-            var instoreproduct = _inStoreProductService.GetProductInStore((Guid)id);
+            var instoreproduct = _inStoreProductService.GetProductInPlace((Guid)id);
 
             if (instoreproduct == null)
             {
@@ -55,7 +55,7 @@ namespace FurnitureStoreWeb.Pages.Admin.InStoreProductManagement
             {
                 return NotFound();
             }
-            var instoreproduct = _inStoreProductService.GetProductInStore((Guid)id);
+            var instoreproduct = _inStoreProductService.GetProductInPlace((Guid)id);
 
             if (instoreproduct != null)
             {

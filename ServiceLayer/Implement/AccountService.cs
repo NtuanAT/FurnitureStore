@@ -17,7 +17,12 @@ namespace ServiceLayer.Implement
 			_accountRepository = accountRepository;
 		}
 
-		public Account GetById(Guid id)
+        public List<Account> GetAvailableAdmins()
+        {
+            return _accountRepository.GetAll().Where(a => a.Role.Equals(AccountRole.Admin) && a.AdminStoreID == null ).ToList();
+        }
+
+        public Account GetById(Guid id)
 		{
 			return _accountRepository.Get(a => a.AccountID == id);
 		}

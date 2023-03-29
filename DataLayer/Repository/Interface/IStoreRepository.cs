@@ -9,6 +9,7 @@ namespace DataLayer.Repository.Interface
 {
 	public interface IStoreRepository : IRepositoryBase<Store>
 	{
-
+		List<Store> GetAllWithRelated();
+		bool CloseStore(Guid storeId);
 	}
 }
