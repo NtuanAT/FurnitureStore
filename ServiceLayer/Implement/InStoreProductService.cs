@@ -21,6 +21,11 @@ namespace ServiceLayer.Implement
             _wareHouseRepository = wareHouseRepository;
         }
 
+		public List<InStoreProduct> GetInStoreProducts(Guid storeID)
+		{
+			return _inStoreProductRepository.GetAllProductInPlace(storeID);
+		}
+
 		public bool Transfer(Guid warehouseProductID, Guid StoreProductID, int quantity)
 		{
 			_inStoreProductRepository.UpdateAmount(warehouseProductID, quantity*(-1));

@@ -4,7 +4,7 @@
 	ViewData["Title"] = "Furniture Store";
 }
 
-<h1>Welcome @Model.Account.Username to Your Furniture Store</h1>
+<h1>Welcome @Model.Customer.Username to Your Furniture Store</h1>
 
 @*Show the Products list*@
 
@@ -32,10 +32,10 @@
 		</div>
 	}
 </div>
-
-@*Show Customer's Cart button*@
+@*
+Show Customer's Cart button
 <div>
-	<a class="btn" asp-page="/CartPage" asp-route="">Cart</a>
+	<a class="btn" asp-page="CartPage" asp-route="">Cart</a>
 </div>
 
 @section Scripts {
@@ -71,5 +71,5 @@ function addToCart(productId,quantity) {
 		}
 
 	</script>
-}
+}*@
 

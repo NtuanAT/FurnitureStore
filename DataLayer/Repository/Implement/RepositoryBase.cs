@@ -46,6 +46,7 @@ namespace DataLayer.Repository.Implement
             _storeDBContext.Entry(entity).State = EntityState.Modified;
 
             return _storeDBContext.SaveChanges() > 0;
+
         }
 
         public bool Update(T entity)

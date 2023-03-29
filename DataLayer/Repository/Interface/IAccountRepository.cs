@@ -10,6 +10,9 @@ namespace DataLayer.Repository.Interface
 	public interface IAccountRepository : IRepositoryBase<Account>
 	{
 		Account Login(string username, string password);
+
+        Account GetDetails(Guid id);
+    
 		Account GetAdminAccountByStoreId(Guid storeId);
 		bool RemoveAdminFromStore(Guid storeId);
 		bool AssignAdminToStore(Guid storeId, Guid adminId);
