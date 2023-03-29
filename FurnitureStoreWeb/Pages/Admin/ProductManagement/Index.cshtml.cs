@@ -30,7 +30,7 @@ namespace FurnitureStoreWeb.Pages.Admin.ProductManagement
         {
 
             // Retrieve session object 
-            string serializedObject = HttpContext.Session.GetString("AdminAccount");
+            string serializedObject = HttpContext.Session.GetString("LoginAccount");
             adminAccount = JsonSerializer.Deserialize<Account>(serializedObject);
 
             if (adminAccount.AdminStoreID != null)
@@ -46,7 +46,7 @@ namespace FurnitureStoreWeb.Pages.Admin.ProductManagement
                 return NotFound();
             }
             // Retrieve session object 
-            string serializedObject = HttpContext.Session.GetString("AdminAccount");
+            string serializedObject = HttpContext.Session.GetString("LoginAccount");
             adminAccount = JsonSerializer.Deserialize<Account>(serializedObject);
 
             Product = _productService.GetAllByStoreId((Guid)adminAccount.AdminStoreID);
