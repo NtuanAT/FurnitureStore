@@ -143,13 +143,28 @@ namespace DataLayer.DataSeed
             };
             #endregion
 
+            #region Product Locations (BelongTo)
+            var storeGuids = new List<Guid>()
+            {
+                Guid.Parse("2f7c4295-4f2f-4651-891b-9b61b6e3adac"),
+                Guid.Parse("ad6c7bb8-90a3-4f9a-abf8-be36acba1012")
+            };
+
+            var warehouseGuids = new List<Guid>()
+            {
+                Guid.Parse("c4b89d97-95c7-4d97-bf8a-3cb3e2b058e3"),
+                Guid.Parse("d1c7f3ab-3f18-46c9-9a0b-25e16f80bf7f")
+            };
+            #endregion
+
             var inStoreProduct1 = new InStoreProduct()
             {
                 InStoreProductID = inStoreProductGuids[0],
                 ProductID = productSS.ProductID,
                 //Product = productSS,
                 Quantity = inStoreProductsQuantity[0],
-                Status = inStoreProductStatus[0]
+                Status = inStoreProductStatus[0],
+                BelongTo = storeGuids[0]
             };
             var inStoreProduct2 = new InStoreProduct()
             {
@@ -157,7 +172,8 @@ namespace DataLayer.DataSeed
                 ProductID = productSS.ProductID,
                 //Product = productSS,
                 Quantity = inStoreProductsQuantity[1],
-                Status = inStoreProductStatus[1]
+                Status = inStoreProductStatus[1],
+                BelongTo = warehouseGuids[0]
             };
             var inStoreProduct3 = new InStoreProduct()
             {
@@ -165,7 +181,8 @@ namespace DataLayer.DataSeed
                 ProductID = productA.ProductID,
                 //Product = productA,
                 Quantity = inStoreProductsQuantity[2],
-                Status = inStoreProductStatus[2]
+                Status = inStoreProductStatus[2],
+                BelongTo = storeGuids[1]
             };
             var inStoreProduct4 = new InStoreProduct()
             {
@@ -173,7 +190,9 @@ namespace DataLayer.DataSeed
                 ProductID = productA.ProductID,
                 //Product = productA,
                 Quantity = inStoreProductsQuantity[3],
-                Status = inStoreProductStatus[3]
+                Status = inStoreProductStatus[3],
+                BelongTo = warehouseGuids[1]
+                
             };
             var inStoreProduct5 = new InStoreProduct()
             {
@@ -181,7 +200,8 @@ namespace DataLayer.DataSeed
                 ProductID = productCT.ProductID,
                 //Product = productCT,
                 Quantity = inStoreProductsQuantity[4],
-                Status = inStoreProductStatus[4]
+                Status = inStoreProductStatus[4],
+                BelongTo = storeGuids[0]
             };
             var inStoreProduct6 = new InStoreProduct()
             {
@@ -189,7 +209,8 @@ namespace DataLayer.DataSeed
                 ProductID = productCT.ProductID,
                 //Product = productCT,
                 Quantity = inStoreProductsQuantity[5],
-                Status = inStoreProductStatus[5]
+                Status = inStoreProductStatus[5],
+                BelongTo = storeGuids[1]
             };
             var inStoreProduct7 = new InStoreProduct()
             {
@@ -197,7 +218,8 @@ namespace DataLayer.DataSeed
                 ProductID = productCT.ProductID,
                 //Product = productCT,
                 Quantity = inStoreProductsQuantity[6],
-                Status = inStoreProductStatus[6]
+                Status = inStoreProductStatus[6],
+                BelongTo = warehouseGuids[0]
             };
             var inStoreProduct8 = new InStoreProduct()
             {
@@ -205,7 +227,8 @@ namespace DataLayer.DataSeed
                 ProductID = productBF.ProductID,
                 //Product = productBF,
                 Quantity = inStoreProductsQuantity[7],
-                Status = inStoreProductStatus[7]
+                Status = inStoreProductStatus[7],
+                BelongTo = warehouseGuids[0]
             };
             var inStoreProduct9 = new InStoreProduct()
             {
@@ -213,7 +236,8 @@ namespace DataLayer.DataSeed
                 ProductID = productBF.ProductID,
                 //Product = productBF,
                 Quantity = inStoreProductsQuantity[8],
-                Status = inStoreProductStatus[8]
+                Status = inStoreProductStatus[8],
+                BelongTo = warehouseGuids[1]
             };
             var inStoreProduct10 = new InStoreProduct()
             {
@@ -221,7 +245,8 @@ namespace DataLayer.DataSeed
                 ProductID = productM.ProductID,
                 //Product = productM,
                 Quantity = inStoreProductsQuantity[9],
-                Status = inStoreProductStatus[9]
+                Status = inStoreProductStatus[9],
+                BelongTo = storeGuids[0]
             };
             var inStoreProduct11 = new InStoreProduct()
             {
@@ -229,7 +254,8 @@ namespace DataLayer.DataSeed
                 ProductID = productM.ProductID,
                 //Product = productM,
                 Quantity = inStoreProductsQuantity[10],
-                Status = inStoreProductStatus[10]
+                Status = inStoreProductStatus[10],
+                BelongTo = storeGuids[1]
             };
             var inStoreProduct12 = new InStoreProduct()
             {
@@ -237,7 +263,8 @@ namespace DataLayer.DataSeed
                 ProductID = productM.ProductID,
                 //Product = productM,
                 Quantity = inStoreProductsQuantity[11],
-                Status = inStoreProductStatus[11]
+                Status = inStoreProductStatus[11],
+                BelongTo = warehouseGuids[1]
             };
             var inStoreProduct13 = new InStoreProduct()
             {
@@ -245,7 +272,8 @@ namespace DataLayer.DataSeed
                 ProductID = productN.ProductID,
                 //Product = productN,
                 Quantity = inStoreProductsQuantity[12],
-                Status = inStoreProductStatus[12]
+                Status = inStoreProductStatus[12],
+                BelongTo = storeGuids[0]
             };
             var inStoreProduct14 = new InStoreProduct()
             {
@@ -253,7 +281,8 @@ namespace DataLayer.DataSeed
                 ProductID = productN.ProductID,
                 //Product = productN,
                 Quantity = inStoreProductsQuantity[13],
-                Status = inStoreProductStatus[13]
+                Status = inStoreProductStatus[13],
+                BelongTo = warehouseGuids[1]
             };
             var inStoreProduct15 = new InStoreProduct()
             {
@@ -261,7 +290,8 @@ namespace DataLayer.DataSeed
                 ProductID = productDT.ProductID,
                 //Product = productDT,
                 Quantity = inStoreProductsQuantity[14],
-                Status = inStoreProductStatus[14]
+                Status = inStoreProductStatus[14],
+                BelongTo = storeGuids[1]
             };
             var inStoreProduct16 = new InStoreProduct()
             {
@@ -269,7 +299,8 @@ namespace DataLayer.DataSeed
                 ProductID = productDT.ProductID,
                 //Product = productDT,
                 Quantity = inStoreProductsQuantity[15],
-                Status = inStoreProductStatus[15]
+                Status = inStoreProductStatus[15],
+                BelongTo = warehouseGuids[0]
             };
             var inStoreProduct17 = new InStoreProduct()
             {
@@ -277,7 +308,8 @@ namespace DataLayer.DataSeed
                 ProductID = productDC.ProductID,
                 //Product = productDC,
                 Quantity = inStoreProductsQuantity[16],
-                Status = inStoreProductStatus[16]
+                Status = inStoreProductStatus[16],
+                BelongTo = storeGuids[0]
             };
             var inStoreProduct18 = new InStoreProduct()
             {
@@ -285,7 +317,8 @@ namespace DataLayer.DataSeed
                 ProductID = productDC.ProductID,
                 //Product = productDC,
                 Quantity = inStoreProductsQuantity[17],
-                Status = inStoreProductStatus[17]
+                Status = inStoreProductStatus[17],
+                BelongTo = warehouseGuids[0]
             };
             var inStoreProduct19 = new InStoreProduct()
             {
@@ -293,7 +326,8 @@ namespace DataLayer.DataSeed
                 ProductID = productDC.ProductID,
                 //Product = productDC,
                 Quantity = inStoreProductsQuantity[18],
-                Status = inStoreProductStatus[18]
+                Status = inStoreProductStatus[18],
+                BelongTo = warehouseGuids[1]
             };
             var inStoreProduct20 = new InStoreProduct()
             {
@@ -301,7 +335,8 @@ namespace DataLayer.DataSeed
                 ProductID = productJC.ProductID,
                 //Product = productJC,
                 Quantity = inStoreProductsQuantity[19],
-                Status = inStoreProductStatus[19]
+                Status = inStoreProductStatus[19],
+                BelongTo = storeGuids[1]
             };
             var inStoreProduct21 = new InStoreProduct()
             {
@@ -309,7 +344,8 @@ namespace DataLayer.DataSeed
                 ProductID = productJC.ProductID,
                 //Product = productJC,
                 Quantity = inStoreProductsQuantity[20],
-                Status = inStoreProductStatus[20]
+                Status = inStoreProductStatus[20],
+                BelongTo = warehouseGuids[1]
             };
             var inStoreProduct22 = new InStoreProduct()
             {
@@ -317,7 +353,8 @@ namespace DataLayer.DataSeed
                 ProductID = productB.ProductID,
                 //Product = productB,
                 Quantity = inStoreProductsQuantity[21],
-                Status = inStoreProductStatus[21]
+                Status = inStoreProductStatus[21],
+                BelongTo = storeGuids[0]
             };
             var inStoreProduct23 = new InStoreProduct()
             {
@@ -325,7 +362,8 @@ namespace DataLayer.DataSeed
                 ProductID = productB.ProductID,
                 //Product = productB,
                 Quantity = inStoreProductsQuantity[22],
-                Status = inStoreProductStatus[22]
+                Status = inStoreProductStatus[22],
+                BelongTo = warehouseGuids[0]
             };
 
             inStoreProducts.Add(inStoreProduct1);

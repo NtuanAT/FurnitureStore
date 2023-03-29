@@ -24,10 +24,30 @@ namespace DataLayer.Repository.Implement
         {
             return _dbSet.Where(predicate).FirstOrDefault();
         }
-        public void Delete(Expression<Func<T, bool>> predicate)
+        public bool Delete(Expression<Func<T, bool>> predicate)
         {
-
+            _dbSet.Remove(Get(predicate));
+            return _storeDBContext.SaveChanges() > 0;
         }
+
+        public bool UpdateTrackedEntity<T>(T entity)
+        {
+            var entityType = _storeDBContext.Model.FindEntityType(typeof(T));
+            var primaryKey = entityType.FindPrimaryKey();
+            var primaryKeyPropertyName = primaryKey.Properties.First().Name; // Only work with table have 1 primary key, could change it to get 2 different primary key name
+
+            var existingEntity = _dbSet.Local.FirstOrDefault(e => _storeDBContext.Entry(e).Property(primaryKeyPropertyName).CurrentValue.Equals(_storeDBContext.Entry(entity).Property(primaryKeyPropertyName).CurrentValue));
+
+            if (existingEntity != null)
+            {
+                _storeDBContext.Entry(existingEntity).State = EntityState.Detached;
+            }
+
+            _storeDBContext.Entry(entity).State = EntityState.Modified;
+
+            return _storeDBContext.SaveChanges() > 0;
+        }
+
         public bool Update(T entity)
         {
 			_dbSet.Attach(entity);
