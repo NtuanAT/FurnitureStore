@@ -19,6 +19,8 @@ namespace ServiceLayer.Interface
         void Delete(Guid accountId);
         bool Create(Account account);
         Account getDetail(Guid accountId);
-    }
+        List<Account> GetAvailableAdmins();
+
+	}
 
 }

@@ -19,7 +19,7 @@ namespace DataLayer.Repository.Implement
 
         public bool AssignAdminToStore(Guid storeId, Guid adminId)
         {
-            var updateRecord = _dbSet.FirstOrDefault(x => x.AccountID.Equals(adminId));
+            var updateRecord = Get(x => x.AccountID.Equals(adminId));
             updateRecord.AdminStoreID = storeId;
 
             return Update(updateRecord);
@@ -27,12 +27,12 @@ namespace DataLayer.Repository.Implement
 
         public Account GetAdminAccountByStoreId(Guid storeId)
         {
-            return _dbSet.FirstOrDefault(x => x.AdminStoreID.Equals(storeId));
+            return Get(x => x.AdminStoreID.Equals(storeId));
         }
 
         public Account Login(string username, string password)
 		{
-			return _dbSet.FirstOrDefault(user => user.Username.Equals(username) && user.Password.Equals(password));
+			return Get(user => user.Username.Equals(username) && user.Password.Equals(password));
 		} 
         public Account GetDetails(Guid id)
         {
@@ -43,7 +43,7 @@ namespace DataLayer.Repository.Implement
 
         public bool RemoveAdminFromStore(Guid storeId)
         {
-            var updateRecord = _dbSet.FirstOrDefault(x => x.AdminStoreID.Equals(storeId));
+            var updateRecord = Get(x => x.AdminStoreID.Equals(storeId));
             updateRecord.AdminStoreID = null;
 
             return Update(updateRecord);

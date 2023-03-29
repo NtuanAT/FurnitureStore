@@ -14,23 +14,21 @@ namespace FurnitureStoreWeb.Pages
 		private readonly IAccountService _accountService;
 
 		[BindProperty]
-		public Account account { get; set; }
+		public Account Account { get; set; }
 
 		public IndexModel(IAccountService accountService)
 		{
 			_accountService = accountService;
-			//Fix loi null object reference
-			account = new Account();
 		}
 
 		public void OnGet()
 		{
-
+			Account = new Account();
 		}
 
 		public IActionResult OnPost()
 		{
-			var result = _accountService.Login(account.Username, account.Password);
+			var result = _accountService.Login(Account.Username, Account.Password);
 			if (result != null)
 			{
 
