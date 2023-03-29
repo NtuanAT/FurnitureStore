@@ -25,10 +25,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Account[0].AccountStatus)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Account[0].StaffStore)
-            </th>
-
+           
             <th></th>
         </tr>
     </thead>
@@ -47,10 +44,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.AccountStatus)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StaffStore.Location)
-            </td>
-
+            
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.AccountID">Edit</a> |
                 <a asp-page="./Details" asp-route-id="@item.AccountID">Details</a> |

@@ -27,7 +27,7 @@ namespace FurnitureStoreWeb.Pages.Management
         public IActionResult OnGet()
         {
 
-            var user = JsonConvert.DeserializeObject<Account>(HttpContext.Session.GetString("LogginUser"));
+            var user = JsonConvert.DeserializeObject<Account>(HttpContext.Session.GetString("LoginAccount"));
             if(user.Role == 0)
             {
                 ViewData["StaffStoreID"] = new SelectList(_storeService.GetAll(), "StoreID", "Location");
