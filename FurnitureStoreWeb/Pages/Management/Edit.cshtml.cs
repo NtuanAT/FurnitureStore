@@ -29,7 +29,7 @@ namespace FurnitureStoreWeb.Pages.Management
 
         public IActionResult OnGet(Guid? id)
         {
-            var user = JsonConvert.DeserializeObject<Account>(HttpContext.Session.GetString("LogginUser"));
+            var user = JsonConvert.DeserializeObject<Account>(HttpContext.Session.GetString("LoginAccount"));
             if(user.Role == 0)
             {
                 if (id == null || _context.Get(id.Value) == null)

@@ -30,7 +30,7 @@ namespace FurnitureStoreWeb.Pages.Management
         }
         private async Task<List<Account>> GetAccountsAsync()
         {
-            Account? user = JsonConvert.DeserializeObject<Account>(HttpContext.Session.GetString("LogginUser")!);
+            Account? user = JsonConvert.DeserializeObject<Account>(HttpContext.Session.GetString("LoginAccount")!);
             return await Task.FromResult(_accountService.GetAll(user.AdminStoreID.Value));
         }
     }
