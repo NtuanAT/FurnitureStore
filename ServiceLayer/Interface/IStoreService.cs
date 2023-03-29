@@ -11,5 +11,8 @@ namespace ServiceLayer.Interface
     public interface IStoreService
     {
         List<StoreServiceModel> GetAll();
+        bool CloseStore(Guid storeId);
+        bool UpdateStore(StoreServiceModel store, Guid newAdminAccount);
+        bool CreateStore(StoreServiceModel store);
     }
 }

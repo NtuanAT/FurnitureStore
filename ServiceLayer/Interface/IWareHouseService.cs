@@ -13,5 +13,8 @@ namespace ServiceLayer.Interface
 		List<WareHouseServiceModel> GetAll();
 		Warehouse GetByID(Guid id);
 		bool UpdateProductQuantityy(Product type, int quantity);
+		bool DeleteWarehouse(Guid warehouseId);
+		bool UpdateWarehouse(WareHouseServiceModel model);
+		bool AddWarehouse(WareHouseServiceModel model);
 	}
 }

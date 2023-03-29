@@ -11,5 +11,6 @@ namespace ServiceLayer.Interface
 	{
 		Account Login(string username, string password);
 		Account GetById(Guid id);
+		List<Account> GetAvailableAdmins();
 	}
 }

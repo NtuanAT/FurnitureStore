@@ -41,7 +41,7 @@ namespace FurnitureStoreWeb.Pages
 
 
 
-                    return RedirectToPage("Admin/ProductManagement/Index");
+                    return RedirectToPage("Admin/WarehouseManagement/Index");
                 }
 
                 return RedirectToPage("Stores");
