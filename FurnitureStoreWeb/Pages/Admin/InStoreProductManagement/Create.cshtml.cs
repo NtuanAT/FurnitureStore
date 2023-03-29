@@ -32,7 +32,7 @@ namespace FurnitureStoreWeb.Pages.Admin.InStoreProductManagement
         public IActionResult OnGet()
         {
             // Retrieve session object 
-            string serializedObject = HttpContext.Session.GetString("AdminAccount");
+            string serializedObject = HttpContext.Session.GetString("LoginAccount");
             adminAccount = JsonSerializer.Deserialize<Account>(serializedObject);
 
             var statuses = Enum.GetValues(typeof(ProductStatus))
@@ -63,7 +63,7 @@ namespace FurnitureStoreWeb.Pages.Admin.InStoreProductManagement
             }
 
             // Retrieve session object 
-            string serializedObject = HttpContext.Session.GetString("AdminAccount");
+            string serializedObject = HttpContext.Session.GetString("LoginAccount");
             adminAccount = JsonSerializer.Deserialize<Account>(serializedObject);
 
             _inStoreProductService.CreateInStoreProduct(InStoreProduct);

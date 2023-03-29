@@ -32,7 +32,7 @@ namespace FurnitureStoreWeb.Pages.Admin.InStoreProductManagement
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {
             // Retrieve session object 
-            string serializedObject = HttpContext.Session.GetString("AdminAccount");
+            string serializedObject = HttpContext.Session.GetString("LoginAccount");
             adminAccount = JsonSerializer.Deserialize<Account>(serializedObject);
 
             var statuses = Enum.GetValues(typeof(ProductStatus))
