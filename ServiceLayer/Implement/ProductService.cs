@@ -41,5 +41,9 @@ namespace ServiceLayer.Implement
             return _productRepository.Delete(p => p.ProductID.Equals(productId));
         }
 
+        public List<Product> GetAll()
+        {
+            return _productRepository.GetAll();
+        }
     }
 }

@@ -14,5 +14,6 @@ namespace ServiceLayer.Interface
         bool CreateProduct(Product product);
         bool UpdateTrackedProduct(Product product);
         Product GetProductById(Guid productId);
+        List<Product> GetAll();
     }
 }

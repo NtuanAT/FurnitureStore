@@ -11,9 +11,10 @@ namespace ServiceLayer.Interface
 	{
 		bool Transfer(Guid warehouseProductID, Guid StoreProductID, int quantity);
         List<InStoreProduct> GetAllProductsInStore(Guid storeId);
-        InStoreProduct GetProductInStore(Guid productId);
+        InStoreProduct GetProductInPlace(Guid productId);
         bool DeActivateProductInStore(InStoreProduct inStoreProduct);
         bool UpdateTrackedInStoreProduct(InStoreProduct inStoreProduct);
         bool CreateInStoreProduct(InStoreProduct inStoreProduct);
+        List<InStoreProduct> GetAllInWarehouseProducts();
     }
 }

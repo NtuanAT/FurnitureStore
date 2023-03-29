@@ -17,6 +17,8 @@ namespace FurnitureStoreWeb.Pages
 		public IndexModel(IAccountService accountService)
 		{
 			_accountService = accountService;
+			//Fix loi null object reference
+			account = new Account();
 		}
 
 		public void OnGet()
