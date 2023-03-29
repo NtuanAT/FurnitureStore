@@ -28,7 +28,7 @@ namespace FurnitureStoreWeb.Pages.Admin.InStoreProductManagement
         public IActionResult OnGet(Guid? id)
         {
             // Retrieve session object 
-            string serializedObject = HttpContext.Session.GetString("AdminAccount");
+            string serializedObject = HttpContext.Session.GetString("LoginAccount");
             adminAccount = JsonSerializer.Deserialize<Account>(serializedObject);
 
             if (id == null)

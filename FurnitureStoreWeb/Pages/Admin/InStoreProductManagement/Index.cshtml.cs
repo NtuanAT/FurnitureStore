@@ -38,7 +38,7 @@ namespace FurnitureStoreWeb.Pages.Admin.InStoreProductManagement
         public async Task OnGet()
         {
             // Retrieve session object 
-            string serializedObject = HttpContext.Session.GetString("AdminAccount");
+            string serializedObject = HttpContext.Session.GetString("LoginAccount");
             adminAccount = JsonSerializer.Deserialize<Account>(serializedObject);
             ViewData["ProductName"] = new SelectList(_productService.GetAllByStoreId((Guid)adminAccount.AdminStoreID), "ProductName", "ProductName");
             storeName = _storeService.GetAll().Where(s => s.StoreID.Equals(adminAccount.AdminStoreID)).FirstOrDefault().StoreName;
@@ -53,7 +53,7 @@ namespace FurnitureStoreWeb.Pages.Admin.InStoreProductManagement
                 return NotFound();
             }
             // Retrieve session object 
-            string serializedObject = HttpContext.Session.GetString("AdminAccount");
+            string serializedObject = HttpContext.Session.GetString("LoginAccount");
             adminAccount = JsonSerializer.Deserialize<Account>(serializedObject);
             ViewData["ProductName"] = new SelectList(_productService.GetAllByStoreId((Guid)adminAccount.AdminStoreID), "ProductName", "ProductName");
             storeName = _storeService.GetAll().Where(s => s.StoreID.Equals(adminAccount.AdminStoreID)).FirstOrDefault().StoreName;
