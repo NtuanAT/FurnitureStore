@@ -302,7 +302,8 @@
 
 	input.addEventListener('input', () => {
 		const inputValue = input.value.toLowerCase();
-		const filteredProducts = productList.filter(productName => product.ProductName.toLowerCase().includes(inputValue));
+
+		const filteredProducts = productList.filter(product => product.productName.toLowerCase().includes(inputValue));
 
 		Render(filteredProducts);
 	});
@@ -606,7 +607,7 @@
 			quantityInput.value = 1;
 			// Set the text and value properties of the new option element
 			newOption.text = product.Product.ProductName;
-			newOption.value = product.InStoreProductID;
+			newOption.value = product.Product.ProductID;
 
 			// Append the new option element to the product select element
 			productSelect.appendChild(newOption);
@@ -625,8 +626,10 @@
 
 			// Set the minimum value
 			quantityInput.min = 1;
+			quantityInput.max = 1;
+
 			for (product of selectedWarehouse.products) {
-				if (selectedProduct == product.InStoreProductID) {
+				if (selectedProduct == product.Product.ProductID) {
 					quantityInput.max = product.Quantity;
 				}
 			}
@@ -662,18 +665,27 @@
 		var selectedwarehouseProductID;
 		var selectedStoreProductID;
 
+		var warehouseHas = false;
+		var storeHas = false;
 		// TODO: Implement the transfer logic here
 
 		for (product of selectedWarehouse.products) {
 			if (product.Product.ProductID == selectedProducType) {
 				selectedwarehouseProductID = product.InStoreProductID;
+				warehouseHas = true;
 			}
 		}
 
 		for (product of selectedStore.products) {
 			if (product.Product.ProductID == selectedProducType) {
 				selectedStoreProductID = product.InStoreProductID;
+				storeHas = true;
 			}
+		}
+
+		if(!(warehouseHas && storeHas)){
+			alert('Wrong Product Transferation, the destinition store does not use this product.\n Please choose the right product from the search');
+			return;
 		}
 
 		$.ajax({

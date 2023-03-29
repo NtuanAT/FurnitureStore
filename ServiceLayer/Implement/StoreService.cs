@@ -16,17 +16,26 @@ namespace ServiceLayer.Implement
         private IStoreRepository _storeRepository;
         private IInStoreProductRepository _products;
         private IMapper _mapper;
-        public StoreService(IStoreRepository storeRepository, IInStoreProductRepository inStoreProductRepository, IMapper mapper)
+        private readonly IAccountRepository _accountRepository;
+
+        public StoreService(IStoreRepository storeRepository, IInStoreProductRepository inStoreProductRepository, IMapper mapper,
+			IAccountRepository accountRepository)
         {
             _storeRepository = storeRepository;
             _products = inStoreProductRepository;
             _mapper = mapper;
+            _accountRepository = accountRepository;
         }
 
-		public List<StoreServiceModel> GetAll()
+        public bool CloseStore(Guid storeId)
+        {
+            return _storeRepository.CloseStore(storeId);
+        }
+
+        public List<StoreServiceModel> GetAll()
 		{
 			
-			var entites = _storeRepository.GetAll();
+			var entites = _storeRepository.GetAllWithRelated();
 
 			var result = new List<StoreServiceModel>();
 			foreach (var item in entites)
@@ -39,7 +48,26 @@ namespace ServiceLayer.Implement
 			return result;
 		}
 
-		private StoreServiceModel ManualMap(Store source)
+        public bool UpdateStore(StoreServiceModel store, Guid newAdminAccount)
+        {
+			var updateStore = ManualMap(store);
+
+            if (store == null) return false;
+
+			var oldAdmin = _accountRepository.GetAdminAccountByStoreId(store.StoreID);
+			if (oldAdmin != null)
+			{
+				_accountRepository.RemoveAdminFromStore(store.StoreID);
+			}
+
+            updateStore.StoreAdminAccountID = newAdminAccount;
+			var newAdmin = _accountRepository.Get(a => a.AccountID.Equals(newAdminAccount));
+			newAdmin.AdminStoreID = store.StoreID;
+
+			return _accountRepository.Update(newAdmin) && _storeRepository.Update(updateStore);
+        }
+
+        private StoreServiceModel ManualMap(Store source)
 		{
 			StoreServiceModel result = new StoreServiceModel();
 			result.StoreID = source.StoreID;
@@ -67,5 +95,20 @@ namespace ServiceLayer.Implement
 
 			return result;
 		}
-	}
+
+        public bool CreateStore(StoreServiceModel store)
+        {
+			var createStore = ManualMap(store);
+			bool check = _storeRepository.Create(createStore);
+
+			if (check)
+			{
+				return _accountRepository.AssignAdminToStore(createStore.StoreID, store.StoreAdminAccountID);
+
+            }
+
+
+            return false; // can't asign admin
+        }
+    }
 }

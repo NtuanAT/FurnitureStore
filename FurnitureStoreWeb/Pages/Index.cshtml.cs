@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
 using ServiceLayer.Interface;
+using System.Text.Json;
 
 namespace FurnitureStoreWeb.Pages
 {
@@ -17,6 +18,8 @@ namespace FurnitureStoreWeb.Pages
 		public IndexModel(IAccountService accountService)
 		{
 			_accountService = accountService;
+			//Fix loi null object reference
+			account = new Account();
 		}
 
 		public void OnGet()
@@ -26,6 +29,7 @@ namespace FurnitureStoreWeb.Pages
 
 		public IActionResult OnPost()
 		{
+
             var result = _accountService.Login(account.Username, account.Password);
 
             if (result != null)
@@ -46,5 +50,6 @@ namespace FurnitureStoreWeb.Pages
                 return RedirectToPage("Error");
             }
         }
+
 	}
 }

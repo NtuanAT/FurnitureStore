@@ -11,6 +11,9 @@ namespace DataLayer.Repository.Interface
 	{
 		List<InStoreProduct> GetAllProductInPlace(Guid placeID);
 		bool UpdateAmount(Guid id, int amount);
+        List<InStoreProduct> GetAllWithRelative();
+        InStoreProduct GetByIdWithRelative(Guid productId);
+        bool DeActivateProductInStore(InStoreProduct inStoreProduct);
 
-	}
+    }
 }

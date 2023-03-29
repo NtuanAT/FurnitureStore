@@ -17,6 +17,7 @@ namespace DataLayer
         public DbSet<InStoreProduct> inStoreProducts { get; set; }
         public DbSet<Store> stores { get; set; }
         public DbSet<Warehouse> wareHouses { get; set; }
+        public DbSet<Order> orders { get; set; }
         public StoreDBContext()
         {
 
@@ -51,15 +52,16 @@ namespace DataLayer
                 .HasForeignKey(a => a.StaffStoreID)
                 .IsRequired(false);
 
-            modelBuilder.Entity<Warehouse>()
-                .HasOne(wh => wh.Admin);
 
-            //#region Seed Data
+
+
+            #region Seed Data
             modelBuilder.SeedAccount();
             modelBuilder.SeedStore();
+            modelBuilder.SeedWarehouse();
             modelBuilder.SeedProduct();
             modelBuilder.SeedInStoreProduct();
-            //#endregion
+            #endregion
 
         }
     }

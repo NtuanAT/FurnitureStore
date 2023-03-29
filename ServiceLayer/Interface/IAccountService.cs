@@ -11,6 +11,7 @@ namespace ServiceLayer.Interface
 	{
 		Account Login(string username, string password);
 		Account GetById(Guid id);
+
         List<Account> GetAll(Guid AdminStoreId);
         Account Get(Guid AccountId);
         IEnumerable<Account> GetAll();
@@ -19,4 +20,5 @@ namespace ServiceLayer.Interface
         bool Create(Account account);
         Account getDetail(Guid accountId);
     }
+
 }

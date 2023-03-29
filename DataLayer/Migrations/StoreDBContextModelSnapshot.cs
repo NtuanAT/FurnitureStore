@@ -17,10 +17,10 @@ namespace DataLayer.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.4")
+                .HasAnnotation("ProductVersion", "6.0.15")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
             modelBuilder.Entity("DataLayer.Entities.Account", b =>
                 {
@@ -59,6 +59,78 @@ namespace DataLayer.Migrations
                     b.HasIndex("StaffStoreID");
 
                     b.ToTable("accounts");
+
+                    b.HasData(
+                        new
+                        {
+                            AccountID = new Guid("8f7b3e92-3c7e-4b1d-a7a1-1f1c7d2f2a2a"),
+                            AccountStatus = 0,
+                            AdminStoreID = new Guid("2f7c4295-4f2f-4651-891b-9b61b6e3adac"),
+                            Password = "123456",
+                            Role = 0,
+                            Username = "admin1"
+                        },
+                        new
+                        {
+                            AccountID = new Guid("1f7d3e82-4c8f-5b2e-b2c0-2f2d8c1e1d1d"),
+                            AccountStatus = 0,
+                            AdminStoreID = new Guid("ad6c7bb8-90a3-4f9a-abf8-be36acba1012"),
+                            Password = "654321",
+                            Role = 0,
+                            Username = "admin2"
+                        },
+                        new
+                        {
+                            AccountID = new Guid("a5b6c7d8-e9f0-1a2b-3c4d-5e6f7a8b9c0d"),
+                            AccountStatus = 0,
+                            Password = "12345678",
+                            Role = 1,
+                            StaffStoreID = new Guid("2f7c4295-4f2f-4651-891b-9b61b6e3adac"),
+                            Username = "johndoe"
+                        },
+                        new
+                        {
+                            AccountID = new Guid("b4e3c2d1-f0e9-d8c7-b6a5-4193f8271c36"),
+                            AccountStatus = 0,
+                            Password = "qwertyuiop",
+                            Role = 1,
+                            StaffStoreID = new Guid("2f7c4295-4f2f-4651-891b-9b61b6e3adac"),
+                            Username = "amandabrown"
+                        },
+                        new
+                        {
+                            AccountID = new Guid("7f6e5d4c-3b2a-1f0e-d9c8-7654a3210b1c"),
+                            AccountStatus = 0,
+                            Password = "Football123",
+                            Role = 1,
+                            StaffStoreID = new Guid("ad6c7bb8-90a3-4f9a-abf8-be36acba1012"),
+                            Username = "davidlee"
+                        },
+                        new
+                        {
+                            AccountID = new Guid("d1c2b3a4-9e8f-7a6b-5c4d-3f2e1c0d9a8b"),
+                            AccountStatus = 0,
+                            Password = "Baseball123",
+                            Role = 1,
+                            StaffStoreID = new Guid("ad6c7bb8-90a3-4f9a-abf8-be36acba1012"),
+                            Username = "sarahjones"
+                        },
+                        new
+                        {
+                            AccountID = new Guid("9fc8a324-fe80-4b48-b106-273d511bf0f4"),
+                            AccountStatus = 0,
+                            Password = "bobthebob",
+                            Role = 2,
+                            Username = "bobross"
+                        },
+                        new
+                        {
+                            AccountID = new Guid("3802d434-b94e-4aab-b4c0-91acfc298c47"),
+                            AccountStatus = 0,
+                            Password = "wowsuchmath",
+                            Role = 2,
+                            Username = "einstein"
+                        });
                 });
 
             modelBuilder.Entity("DataLayer.Entities.InStoreProduct", b =>
@@ -84,6 +156,206 @@ namespace DataLayer.Migrations
                     b.HasIndex("ProductID");
 
                     b.ToTable("inStoreProducts");
+
+                    b.HasData(
+                        new
+                        {
+                            InStoreProductID = new Guid("f3c72cc3-d2e8-4296-bf34-712ddfabd5f9"),
+                            BelongTo = new Guid("2f7c4295-4f2f-4651-891b-9b61b6e3adac"),
+                            ProductID = new Guid("57acf196-c71c-49b0-aad1-a1fe004f23fe"),
+                            Quantity = 5,
+                            Status = 1
+                        },
+                        new
+                        {
+                            InStoreProductID = new Guid("6bbd1c61-69cb-4de6-b7f6-4c144b62dc4a"),
+                            BelongTo = new Guid("c4b89d97-95c7-4d97-bf8a-3cb3e2b058e3"),
+                            ProductID = new Guid("57acf196-c71c-49b0-aad1-a1fe004f23fe"),
+                            Quantity = 3,
+                            Status = 1
+                        },
+                        new
+                        {
+                            InStoreProductID = new Guid("90cb0a2d-5da5-4cf4-8e0c-4ecaa1704d4e"),
+                            BelongTo = new Guid("ad6c7bb8-90a3-4f9a-abf8-be36acba1012"),
+                            ProductID = new Guid("f32f6db0-fa3d-44b3-98e3-39b2ffc0afc7"),
+                            Quantity = 10,
+                            Status = 1
+                        },
+                        new
+                        {
+                            InStoreProductID = new Guid("f7a0dd2a-1da5-4f45-b338-59306e48c802"),
+                            BelongTo = new Guid("d1c7f3ab-3f18-46c9-9a0b-25e16f80bf7f"),
+                            ProductID = new Guid("f32f6db0-fa3d-44b3-98e3-39b2ffc0afc7"),
+                            Quantity = 2,
+                            Status = 0
+                        },
+                        new
+                        {
+                            InStoreProductID = new Guid("9ec8c30f-d6c1-47ba-9d62-c2128a7e374a"),
+                            BelongTo = new Guid("2f7c4295-4f2f-4651-891b-9b61b6e3adac"),
+                            ProductID = new Guid("8b36a544-4377-40c7-bb36-7471c14fe502"),
+                            Quantity = 20,
+                            Status = 1
+                        },
+                        new
+                        {
+                            InStoreProductID = new Guid("ba43d2f9-0763-43fc-9cfc-d37f57f8c7df"),
+                            BelongTo = new Guid("ad6c7bb8-90a3-4f9a-abf8-be36acba1012"),
+                            ProductID = new Guid("8b36a544-4377-40c7-bb36-7471c14fe502"),
+                            Quantity = 5,
+                            Status = 2
+                        },
+                        new
+                        {
+                            InStoreProductID = new Guid("e94db7d1-c1c9-4019-bd31-0ba7d319b361"),
+                            BelongTo = new Guid("c4b89d97-95c7-4d97-bf8a-3cb3e2b058e3"),
+                            ProductID = new Guid("8b36a544-4377-40c7-bb36-7471c14fe502"),
+                            Quantity = 10,
+                            Status = 1
+                        },
+                        new
+                        {
+                            InStoreProductID = new Guid("a88c904a-760d-40a9-879f-3e05c304d307"),
+                            BelongTo = new Guid("c4b89d97-95c7-4d97-bf8a-3cb3e2b058e3"),
+                            ProductID = new Guid("bd614703-badc-4d12-970a-27c64b59847b"),
+                            Quantity = 7,
+                            Status = 1
+                        },
+                        new
+                        {
+                            InStoreProductID = new Guid("f57d030b-7b23-463d-8041-e33436c62f0e"),
+                            BelongTo = new Guid("d1c7f3ab-3f18-46c9-9a0b-25e16f80bf7f"),
+                            ProductID = new Guid("bd614703-badc-4d12-970a-27c64b59847b"),
+                            Quantity = 0,
+                            Status = 0
+                        },
+                        new
+                        {
+                            InStoreProductID = new Guid("777e83d8-b996-4186-a7b4-4d4a4c9e21a6"),
+                            BelongTo = new Guid("2f7c4295-4f2f-4651-891b-9b61b6e3adac"),
+                            ProductID = new Guid("2ed1ddce-f6b7-4f50-8636-954aad785bda"),
+                            Quantity = 10,
+                            Status = 1
+                        },
+                        new
+                        {
+                            InStoreProductID = new Guid("d2d6bfc8-2c3c-42a6-816e-84a8c08e60b5"),
+                            BelongTo = new Guid("ad6c7bb8-90a3-4f9a-abf8-be36acba1012"),
+                            ProductID = new Guid("2ed1ddce-f6b7-4f50-8636-954aad785bda"),
+                            Quantity = 2,
+                            Status = 1
+                        },
+                        new
+                        {
+                            InStoreProductID = new Guid("ee05d814-32c2-47a3-97a3-d6df16d9a72e"),
+                            BelongTo = new Guid("d1c7f3ab-3f18-46c9-9a0b-25e16f80bf7f"),
+                            ProductID = new Guid("2ed1ddce-f6b7-4f50-8636-954aad785bda"),
+                            Quantity = 5,
+                            Status = 0
+                        },
+                        new
+                        {
+                            InStoreProductID = new Guid("6b1c6a60-6a1a-4df5-b0e3-8fb9c93ab55e"),
+                            BelongTo = new Guid("2f7c4295-4f2f-4651-891b-9b61b6e3adac"),
+                            ProductID = new Guid("0314642e-0eda-473a-9f1e-487acea7b191"),
+                            Quantity = 15,
+                            Status = 1
+                        },
+                        new
+                        {
+                            InStoreProductID = new Guid("5d5d5c5c-1635-4c12-b5d5-babfbac9d0cc"),
+                            BelongTo = new Guid("d1c7f3ab-3f18-46c9-9a0b-25e16f80bf7f"),
+                            ProductID = new Guid("0314642e-0eda-473a-9f1e-487acea7b191"),
+                            Quantity = 3,
+                            Status = 2
+                        },
+                        new
+                        {
+                            InStoreProductID = new Guid("7ee570c1-2b7e-480a-8706-5e6d208fb6b9"),
+                            BelongTo = new Guid("ad6c7bb8-90a3-4f9a-abf8-be36acba1012"),
+                            ProductID = new Guid("7f19b793-7023-4751-bcae-b8c25688beef"),
+                            Quantity = 3,
+                            Status = 1
+                        },
+                        new
+                        {
+                            InStoreProductID = new Guid("f3f30c95-8ba6-4bc6-bc27-fa0e99128a8b"),
+                            BelongTo = new Guid("c4b89d97-95c7-4d97-bf8a-3cb3e2b058e3"),
+                            ProductID = new Guid("7f19b793-7023-4751-bcae-b8c25688beef"),
+                            Quantity = 1,
+                            Status = 2
+                        },
+                        new
+                        {
+                            InStoreProductID = new Guid("1f2edbe3-23b8-44aa-a812-66607c7bc09e"),
+                            BelongTo = new Guid("2f7c4295-4f2f-4651-891b-9b61b6e3adac"),
+                            ProductID = new Guid("b54d41b5-e213-41ba-8435-b7f3d6234fa7"),
+                            Quantity = 10,
+                            Status = 1
+                        },
+                        new
+                        {
+                            InStoreProductID = new Guid("9b22f0b2-c7d2-466c-9737-0f68b32aa759"),
+                            BelongTo = new Guid("c4b89d97-95c7-4d97-bf8a-3cb3e2b058e3"),
+                            ProductID = new Guid("b54d41b5-e213-41ba-8435-b7f3d6234fa7"),
+                            Quantity = 5,
+                            Status = 1
+                        },
+                        new
+                        {
+                            InStoreProductID = new Guid("b0ec7e9d-6d29-47d5-b5bb-1bcb5ed312c5"),
+                            BelongTo = new Guid("d1c7f3ab-3f18-46c9-9a0b-25e16f80bf7f"),
+                            ProductID = new Guid("b54d41b5-e213-41ba-8435-b7f3d6234fa7"),
+                            Quantity = 0,
+                            Status = 0
+                        },
+                        new
+                        {
+                            InStoreProductID = new Guid("dab37d9c-69f5-4d17-991c-8c4dded6901a"),
+                            BelongTo = new Guid("ad6c7bb8-90a3-4f9a-abf8-be36acba1012"),
+                            ProductID = new Guid("870bd28d-2b95-4e23-b0f9-0db46e924a87"),
+                            Quantity = 2,
+                            Status = 1
+                        },
+                        new
+                        {
+                            InStoreProductID = new Guid("3d72d978-9ee9-4e24-a798-01d08d9055f5"),
+                            BelongTo = new Guid("d1c7f3ab-3f18-46c9-9a0b-25e16f80bf7f"),
+                            ProductID = new Guid("870bd28d-2b95-4e23-b0f9-0db46e924a87"),
+                            Quantity = 1,
+                            Status = 2
+                        },
+                        new
+                        {
+                            InStoreProductID = new Guid("66b36a90-2d75-4e9f-ae57-ebe0f17aebc4"),
+                            BelongTo = new Guid("2f7c4295-4f2f-4651-891b-9b61b6e3adac"),
+                            ProductID = new Guid("c1b0c347-ffd4-466e-8966-0fb02971b4ca"),
+                            Quantity = 8,
+                            Status = 1
+                        },
+                        new
+                        {
+                            InStoreProductID = new Guid("19a69e71-e463-4d11-9e25-d061033b4126"),
+                            BelongTo = new Guid("c4b89d97-95c7-4d97-bf8a-3cb3e2b058e3"),
+                            ProductID = new Guid("c1b0c347-ffd4-466e-8966-0fb02971b4ca"),
+                            Quantity = 4,
+                            Status = 2
+                        });
+                });
+
+            modelBuilder.Entity("DataLayer.Entities.Order", b =>
+                {
+                    b.Property<Guid>("OrderID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.HasKey("OrderID");
+
+                    b.ToTable("orders");
                 });
 
             modelBuilder.Entity("DataLayer.Entities.Product", b =>
@@ -106,6 +378,78 @@ namespace DataLayer.Migrations
                     b.HasKey("ProductID");
 
                     b.ToTable("products");
+
+                    b.HasData(
+                        new
+                        {
+                            ProductID = new Guid("57acf196-c71c-49b0-aad1-a1fe004f23fe"),
+                            Category = "Living Room Furniture",
+                            Price = 1500.0,
+                            ProductName = "Sofa Set"
+                        },
+                        new
+                        {
+                            ProductID = new Guid("f32f6db0-fa3d-44b3-98e3-39b2ffc0afc7"),
+                            Category = "Living Room Furniture",
+                            Price = 500.0,
+                            ProductName = "Armchair"
+                        },
+                        new
+                        {
+                            ProductID = new Guid("8b36a544-4377-40c7-bb36-7471c14fe502"),
+                            Category = "Living Room Furniture",
+                            Price = 300.0,
+                            ProductName = "Coffee Table"
+                        },
+                        new
+                        {
+                            ProductID = new Guid("bd614703-badc-4d12-970a-27c64b59847b"),
+                            Category = "Bedroom Furniture",
+                            Price = 1000.0,
+                            ProductName = "Bed Frame"
+                        },
+                        new
+                        {
+                            ProductID = new Guid("2ed1ddce-f6b7-4f50-8636-954aad785bda"),
+                            Category = "Bedroom Furniture",
+                            Price = 800.0,
+                            ProductName = "Mattress"
+                        },
+                        new
+                        {
+                            ProductID = new Guid("0314642e-0eda-473a-9f1e-487acea7b191"),
+                            Category = "Bedroom Furniture",
+                            Price = 200.0,
+                            ProductName = "Nightstand"
+                        },
+                        new
+                        {
+                            ProductID = new Guid("7f19b793-7023-4751-bcae-b8c25688beef"),
+                            Category = "Dining Room Furniture",
+                            Price = 1200.0,
+                            ProductName = "Dining Table"
+                        },
+                        new
+                        {
+                            ProductID = new Guid("b54d41b5-e213-41ba-8435-b7f3d6234fa7"),
+                            Category = "Dining Room Furniture",
+                            Price = 150.0,
+                            ProductName = "Dining Chair"
+                        },
+                        new
+                        {
+                            ProductID = new Guid("870bd28d-2b95-4e23-b0f9-0db46e924a87"),
+                            Category = "Dining Room Furniture",
+                            Price = 1500.0,
+                            ProductName = "Japan Cabinet"
+                        },
+                        new
+                        {
+                            ProductID = new Guid("c1b0c347-ffd4-466e-8966-0fb02971b4ca"),
+                            Category = "Home Office Furniture",
+                            Price = 1000.0,
+                            ProductName = "Bookcase"
+                        });
                 });
 
             modelBuilder.Entity("DataLayer.Entities.Store", b =>
@@ -132,15 +476,30 @@ namespace DataLayer.Migrations
                     b.HasKey("StoreID");
 
                     b.ToTable("stores");
+
+                    b.HasData(
+                        new
+                        {
+                            StoreID = new Guid("2f7c4295-4f2f-4651-891b-9b61b6e3adac"),
+                            Location = "New York",
+                            Status = 0,
+                            StoreAdminAccountID = new Guid("8f7b3e92-3c7e-4b1d-a7a1-1f1c7d2f2a2a"),
+                            StoreName = "Classy Furniture"
+                        },
+                        new
+                        {
+                            StoreID = new Guid("ad6c7bb8-90a3-4f9a-abf8-be36acba1012"),
+                            Location = "Los Angeles",
+                            Status = 0,
+                            StoreAdminAccountID = new Guid("1f7d3e82-4c8f-5b2e-b2c0-2f2d8c1e1d1d"),
+                            StoreName = "Artisan Furniture"
+                        });
                 });
 
             modelBuilder.Entity("DataLayer.Entities.Warehouse", b =>
                 {
                     b.Property<Guid>("WareHouseID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("AdminAccountID")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Location")
@@ -153,9 +512,21 @@ namespace DataLayer.Migrations
 
                     b.HasKey("WareHouseID");
 
-                    b.HasIndex("AdminAccountID");
-
                     b.ToTable("wareHouses");
+
+                    b.HasData(
+                        new
+                        {
+                            WareHouseID = new Guid("c4b89d97-95c7-4d97-bf8a-3cb3e2b058e3"),
+                            Location = "Chicago",
+                            Name = "Chicago South Warehouse #9"
+                        },
+                        new
+                        {
+                            WareHouseID = new Guid("d1c7f3ab-3f18-46c9-9a0b-25e16f80bf7f"),
+                            Location = "Miami",
+                            Name = "Miami Dock Warehouse"
+                        });
                 });
 
             modelBuilder.Entity("DataLayer.Entities.Account", b =>
@@ -182,17 +553,6 @@ namespace DataLayer.Migrations
                         .IsRequired();
 
                     b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("DataLayer.Entities.Warehouse", b =>
-                {
-                    b.HasOne("DataLayer.Entities.Account", "Admin")
-                        .WithMany()
-                        .HasForeignKey("AdminAccountID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Admin");
                 });
 
             modelBuilder.Entity("DataLayer.Entities.Product", b =>

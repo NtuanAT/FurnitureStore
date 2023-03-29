@@ -12,8 +12,8 @@ namespace FurnitureStoreWeb.Pages
         private IWareHouseService _warehouses;
         private IStoreService _stores;
         private IProductService _products;
-        private IInstoreProductService _instoreService;
-        public TransferPageModel(IStoreService storeService, IWareHouseService wareHouseService, IProductService productService, IInstoreProductService instoreProductService)
+        private IInStoreProductService _instoreService;
+        public TransferPageModel(IStoreService storeService, IWareHouseService wareHouseService, IProductService productService, IInStoreProductService instoreProductService)
         {
             _stores = storeService;
             _warehouses = wareHouseService;
@@ -88,8 +88,7 @@ namespace FurnitureStoreWeb.Pages
 
             try
             {
-                _instoreService.Transfer(Guid.Parse(warehouseProductID), Guid.Parse(storeProductID), quantity);
-
+				status = _instoreService.Transfer(Guid.Parse(warehouseProductID), Guid.Parse(storeProductID), quantity);
 			}
 			catch(Exception ex)
             {
