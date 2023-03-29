@@ -54,6 +54,7 @@ namespace DataLayer
 
 
 
+
             #region Seed Data
             modelBuilder.SeedAccount();
             modelBuilder.SeedStore();

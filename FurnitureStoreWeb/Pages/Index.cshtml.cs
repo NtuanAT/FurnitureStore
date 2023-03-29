@@ -2,6 +2,7 @@
 using DataLayer.Repository.Interface;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Newtonsoft.Json;
 using ServiceLayer.Interface;
 using System.Text.Json;
 
@@ -38,6 +39,11 @@ namespace FurnitureStoreWeb.Pages
                     // Set session object
                     HttpContext.Session.SetString("AdminAccount", serializedObject);
                     return RedirectToPage("Admin/ProductManagement/Index");
+                    return RedirectToPage("Admin/AdminHomePage");
+                }
+                else if (result.Role == AccountRole.Staff)
+                {
+                    return RedirectToPage("StaffHomePage");
                 }
 				if(result.Role == AccountRole.Customer)
 				{
