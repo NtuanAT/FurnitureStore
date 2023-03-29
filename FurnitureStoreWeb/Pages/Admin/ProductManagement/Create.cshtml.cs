@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using DataLayer;
 using DataLayer.Entities;
 using ServiceLayer.Interface;
+using Newtonsoft.Json;
 
 namespace FurnitureStoreWeb.Pages.Admin.ProductManagement
 {
@@ -22,7 +23,14 @@ namespace FurnitureStoreWeb.Pages.Admin.ProductManagement
 
         public IActionResult OnGet()
         {
-            return Page();
+
+            var user = JsonConvert.DeserializeObject<Account>(HttpContext.Session.GetString("AdminAccount"));
+            if(user.Role == 0)
+            {
+                return Page();
+
+            }
+            return Unauthorized();
         }
 
         [BindProperty]

@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using DataLayer;
 using DataLayer.Entities;
 using ServiceLayer.Interface;
+using Newtonsoft.Json;
 
 namespace FurnitureStoreWeb.Pages.Admin.ProductManagement
 {
@@ -25,22 +26,27 @@ namespace FurnitureStoreWeb.Pages.Admin.ProductManagement
 
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {
-            if (id == null)
+            var user = JsonConvert.DeserializeObject<Account>(HttpContext.Session.GetString("AdminAccount"));  
+            if (user.Role == 0)
             {
-                return NotFound();
-            }
+                if (id == null)
+                {
+                    return NotFound();
+                }
 
-            var product = _productService.GetProductById((Guid)id);
+                var product = _productService.GetProductById((Guid)id);
 
-            if (product == null)
-            {
-                return NotFound();
+                if (product == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    Product = product;
+                }
+                return Page();
             }
-            else 
-            {
-                Product = product;
-            }
-            return Page();
+            return Unauthorized();
         }
 
         public async Task<IActionResult> OnPostAsync(Guid? id)
