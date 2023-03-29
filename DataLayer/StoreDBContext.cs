@@ -52,6 +52,10 @@ namespace DataLayer
                 .HasForeignKey(a => a.StaffStoreID)
                 .IsRequired(false);
 
+            modelBuilder.Entity<Order>()
+                .HasOne(o => o.Customer)
+				.WithMany(a => a.Orders)
+				.HasForeignKey(o => o.CustomerID);
 
 
 

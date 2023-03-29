@@ -11,6 +11,10 @@ namespace DataLayer.Entities
     {
         [Key]
         public Guid OrderID { get; set; }
+        public Guid CustomerID { get; set; }
+        public Account Customer { get; set; }
+        public DateTime OrderDate { get; set; }
+        public DateTime? DeliveryDate { get; set; }
         List<InStoreProduct> Products { get; set; }
         public OrderStatus Status { get; set; }
 

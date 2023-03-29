@@ -22,6 +22,8 @@ namespace DataLayer.Entities
 
         public Guid? AdminStoreID { get; set; }
         public Store AdminStore { get; set; }
+
+		public List<Order>? Orders { get; set; }
     }
 
 	public enum AccountRole
