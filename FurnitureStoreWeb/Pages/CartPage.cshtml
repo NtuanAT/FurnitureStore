@@ -1,0 +1,15 @@
+﻿@page
+@model FurnitureStoreWeb.Pages.CartPageModel
+@{
+	ViewData["Title"] = "Cart";
+}
+<h1>Your Cart</h1>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            var newNavItem = '<li class="nav-item"><a class="nav-link text-dark" href="/CartPage">Cart</a></li>';
+            $('.navbar-nav.flex-grow-1').append(newNavItem);
+        });
+    </script>
+}

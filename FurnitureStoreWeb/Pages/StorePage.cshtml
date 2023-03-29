@@ -18,28 +18,33 @@
 				<span>Price: @product.Product.Price</span>
 				<span>In Store: @product.Quantity</span>
 				<div class="product-more-details" hidden>
-					<span>Material: Gỗ</span>
-					<span>Dimensions: Đứng</span>
-					<span>Color: Trắng</span>
+					<span>Material: Gỗ</span><br />
+					<span>Dimensions: Đứng</span><br />
+					<span>Color: Trắng</span><br />
+					You want:
+					<input type="number" min="1" max="@product.Quantity" />
+					<div class="product-actions">
+						<button class="btn add-to-cart">Add to Cart</button>
+					</div>
 				</div>
 				<div class="product-actions">
-					<button class="btn">View Detail</button>
-				</div>
-				<div class="product-actions">
-					<button class="btn">Add to Cart</button>
+					<button class="btn view-detail">View Detail</button>
 				</div>
 			</div>
 		</div>
 	}
 </div>
-@*
-Show Customer's Cart button
-<div>
-	<a class="btn" asp-page="CartPage" asp-route="">Cart</a>
-</div>
+
 
 @section Scripts {
 	<script>
+		$(document).ready(function () {
+			var newNavItem = '<li class="nav-item"><a class="nav-link text-dark" href="/CartPage">Cart</a></li>';
+			$('.navbar-nav.flex-grow-1').append(newNavItem);
+			newNavItem = '<li class="nav-item"><a class="nav-link text-dark" href="/OrderPage">Order</a></li>';
+			$('.navbar-nav.flex-grow-1').append(newNavItem);
+		});
+
 		document.addEventListener("DOMContentLoaded", function () {
 			var productCards = document.querySelectorAll(".product-card");
 			productCards.forEach(function (productCard) {
@@ -47,29 +52,51 @@ Show Customer's Cart button
 				var addToCartButton = productCard.querySelector(".add-to-cart");
 				var productDetails = productCard.querySelector(".product-details");
 				var productMoreDetails = productCard.querySelector(".product-more-details");
+				var quantityInput = productCard.querySelector("input[type='number']");
 
 				viewDetailButton.addEventListener("click", function () {
 					productDetails.classList.toggle("expanded");
 					productMoreDetails.hidden = !productMoreDetails.hidden;
 				});
 
-				addToCartButton.addEventListener("click", function (button) {
-					button.addEventListener('click', function (event) {
-						const productId = event.target.getAttribute('data-product-id');
-						// Call a function to add the product to the cart
-						addToCart(productId, quantity);
-					});
+				addToCartButton.addEventListener("click", function (event) {
+					const productId = event.target.getAttribute('data-product-id');
+
+					const quantity = parseInt(quantityInput.value) || 1;
+					// Call a function to add the product to the cart
+					addToCart(productId, quantity);
 				});
 			});
 		});
 
-		//addToCart method to add product to cart and update the cart
-function addToCart(productId,quantity) {
-			// Call the API to add the product to the cart
+		function addToCart(productId, quantity) {
+			// Create the request payload
+			const payload = {
+				productId: productId,
+				quantity: quantity
+			};
 
-			// Update the cart
+			// Send the request using Fetch API
+			fetch('/CartPage', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(payload)
+			})
+				.then(response => {
+					if (response.ok) {
+						// Update the cart
+						updateCart();
+					} else {
+						throw new Error('Something went wrong');
+					}
+				})
+				.catch(error => {
+					console.error('Error:', error);
+				});
 		}
 
 	</script>
-}*@
+}
 

@@ -75,6 +75,7 @@ h3 {
 
     .btn:hover {
         background-color: #0056b3;
+        color:white;
     }
 
 .store-container {
@@ -98,5 +99,52 @@ h3 {
 .store-location {
     margin-bottom: 20px;
 }
+
+.product-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.product-card {
+    background-color: #f8f8f8;
+    border: 1px solid #e8e8e8;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 16px;
+    padding: 16px;
+    width: 300px;
+}
+
+.product-details {
+    display: flex;
+    flex-direction: column;
+}
+
+    .product-details h3 {
+        font-size: 24px;
+        margin-bottom: 8px;
+    }
+
+    .product-details span {
+        font-size: 16px;
+        margin-bottom: 4px;
+    }
+
+.product-more-details {
+    font-size: 14px;
+}
+
+.product-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 12px;
+}
+
+    .product-actions:not(:first-child) {
+        margin-left: 8px;
+    }
+
 
 
